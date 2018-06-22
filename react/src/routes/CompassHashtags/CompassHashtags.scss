@@ -1,0 +1,16 @@
+.compassHashtags{
+    height: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .header{
+        width: 979px;
+    }
+    .main{
+        width: 979px;
+    }
+    .loadingSpinner{
+        margin-top: 150px;
+    }
+}

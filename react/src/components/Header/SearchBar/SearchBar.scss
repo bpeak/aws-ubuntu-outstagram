@@ -1,0 +1,115 @@
+$searchImg-width : 12px;
+.searchBar{
+    position: relative;
+    border: 1px solid #f6f6f6;
+    border-radius: 3%;
+    width: 215px;
+    height: 33px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .cover{
+        border: 1px solid #d3d3d3;
+        border-radius: 3%;
+        background-color: #f6f6f6;
+        pointer-events: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img{
+            width: $searchImg-width;
+            height: $searchImg-width;
+        }
+        span{
+            margin-left: 5px;
+            color: #999;
+            font-size: 15px;
+            overflow: hidden; 
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+    input{
+        color: #999;
+        font-size: 15px;
+        padding-left: 27px;
+        background-color: white;
+        width: 100%;
+        height: 100%;
+    }
+    input:focus{
+        outline: none;
+    }
+    .searchImg_focus{
+        position: absolute;
+        left: 9px;
+        width: $searchImg-width;
+        height: $searchImg-width;
+    }
+    .smallLoadingSpinner-container{
+        position: absolute;
+        right: 2px;
+    }
+}
+
+.searchBar__modal-wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    .__modal{
+        overflow: auto;
+        position: relative;
+        top: 67px;
+        right: 42px;
+        width: 260px;
+        height: 380px;
+
+        background-color: #ffffff;
+        border: 1px solid #d3d3d3;
+        border-radius: 2%;
+        box-shadow:
+            -1px -1px 2px 1px #d3d3d3,
+            1px 1px 2px 1px #d3d3d3;
+        .__hashtag{
+            cursor: pointer;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid#d3d3d3;
+            img{
+                margin: 13px;
+                width: 27px;
+                height: 27px;
+            }
+            .__textSet{
+                display: flex;
+                flex-direction: column;
+                font-size: 14px;
+                font-weight: 600;
+                span{
+                    width: 170px;
+                    overflow: hidden; 
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    margin: 2px;
+                }
+                span:nth-child(1){
+                    color: #262626;
+                }
+                span:nth-child(2){
+                    color: #999;
+                }
+            }            
+        }
+        .__hashtag:hover{
+            background-color: red;
+        }
+    }
+}

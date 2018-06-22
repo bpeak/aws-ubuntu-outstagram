@@ -1,0 +1,45 @@
+.profileAside{
+    width: 300px;
+    margin-left: 30px;
+
+    color: #c7c7c7;
+    font-size: 14px;
+    font-weight: 700;
+    div{
+        margin: 15px;
+    }
+}
+
+#profileAside_nav nav ul{
+    padding: 0;
+    list-style-type: none;
+}
+
+#profileAside_story{
+    font-weight: 800;
+    color: #999;
+}
+
+#profilePhoto-container img{
+    width: 57px;
+    height: 57px;    
+}
+
+#profileAside-userSet{
+    border-bottom: 1px solid #999999;
+    display: flex;
+    align-items: center;
+}
+
+#profileAside-userSet-stringSet{
+    span{
+        display: block;
+    }
+}
+#profileAside-userSet-stringSet span:nth-child(1){
+    color: #262626;
+    font-weight: 800;
+}
+#profileAside-userSet-stringSet span:nth-child(2){
+    color: #999;
+}

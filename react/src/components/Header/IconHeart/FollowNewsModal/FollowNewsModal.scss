@@ -1,0 +1,24 @@
+.followNewsModal-container{
+    right: 0;
+    top: 35px;
+    width: 500px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #323232;
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow:10px 10px 10 10px #ffffff;
+    border-radius: 2%;
+    border: 1px solid #d3d3d3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.followNewsModal-active{
+    height: 362px;
+}
+
+.followNewsModal-InActive{
+    height: 117px;
+}

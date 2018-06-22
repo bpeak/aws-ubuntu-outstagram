@@ -1,0 +1,28 @@
+#header{
+    border-bottom: 1px solid #d3d3d3;
+    box-shadow:0px 0px 10 1px #ffffff;
+
+    display: flex;
+    background: #ffffff;
+    justify-content: center;
+}
+.header__content{
+    height: 72px;
+    flex-basis: 980px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header__icon_camera{
+    width: 35px;
+    margin-right: 10px;
+}
+.header__icon_bstargram{
+    height: 31px;
+}
+.header__icon_right{
+    margin-left: 30px;
+    width: 26px;
+}
+

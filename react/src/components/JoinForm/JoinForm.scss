@@ -1,0 +1,76 @@
+#joinForm-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+    border: 1px solid #d3d3d3;
+    box-shadow:1px 1px 10 1px #ffffff;
+    background-color: #fff;
+    form{
+        input{
+            display: block;
+            margin: 15px;
+            width: 258px;
+            height: 36px;
+        }
+    }
+    div{
+        position: relative;
+    }
+}
+
+.joinForm-input{
+    padding-left: 10px;
+}
+#joinForm-btnSubmit{
+    cursor: pointer;
+    height: 30px;
+    background-color: #3897f0;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+
+    border: 3px solid #3897f0;
+    border-radius: 4%;
+}
+#joinForm-btnSubmit:disabled{
+    background-color: #b4cfe9;
+    border: 3px solid #b4cfe9;
+}
+#joinForm-logoImg{
+    width: 175px;
+    margin-top: 23px;
+    margin-bottom: 10px;
+}
+
+// #loginForm-container{
+//     width: 350px;
+//     border: 1px solid #d3d3d3;
+//     box-shadow:1px 1px 10 1px #ffffff;
+
+//     background-color: #fff;
+
+//     display: flex;
+//     align-items: center;
+//     flex-direction: column;
+//     span{
+//         display: block;
+//         font-size: 14px;
+//         margin: 10px;
+//     }
+//     form{
+//         input{
+//             width: 258px;
+//             margin: 11px;
+//             display: block;
+//         }
+//     }
+// }
+
+.joinForm-mark{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 17px;
+    top: 6px;
+}

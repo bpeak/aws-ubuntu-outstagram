@@ -1,0 +1,20 @@
+.postContent{
+    width: 100%;
+}
+.postContent-video-container{
+    cursor: pointer;
+    width: 100%;
+    position: relative;
+    .video{
+        width: 100%;
+    }
+    .play{
+        pointer-events: none;
+        opacity: 0.55;
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: calc(50% - 50px);
+        left: calc(50% - 50px);
+    }
+}

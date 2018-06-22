@@ -1,0 +1,22 @@
+@keyframes example {
+    from {background-color: red;}
+    to {background-color: orange;}
+}
+
+.passportHeader{
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;  
+
+    display: flex;
+    align-items: center;
+    height: 51px;
+    background-color: red;
+    span{
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        margin-left: 20px;
+    }
+}

@@ -1,0 +1,40 @@
+#slideShow-container{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 618px;
+}
+#slideShow-phone{
+    height: 100%;
+}
+#slideShow-phone-container{
+    position: absolute;
+    top: 73px;
+    width: 265px;
+    height: 472px;
+    border: 2px solid grey;
+    img{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+ 
+.slideImgCurrent{
+    animation-name: fadeIn;
+    animation-duration: 4s;	
+}
+.slideImgPrevious{
+    opacity: 0;
+    animation-name: fadeOut;
+    animation-duration: 3s;
+}

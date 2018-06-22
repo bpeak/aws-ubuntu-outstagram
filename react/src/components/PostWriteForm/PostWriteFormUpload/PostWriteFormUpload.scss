@@ -1,0 +1,47 @@
+.PostWriteFormUpload{
+    width: 100%;
+    .file{
+        margin-top: 10px;
+        float: right;
+        img{
+            float: right;
+            cursor: pointer;
+            width: 60px;
+            height: 60px;
+        }
+        div{
+            font-size: 15px;
+            color: #999;
+        }
+        .adding{
+            display: flex;
+            align-items: center;
+            input{
+                display: none;
+            }
+            span{
+                margin-right: 10px;
+            }
+        }
+    }
+    .contents{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        img{
+            margin: 10px;
+            border: 3px solid #d3d3d3;
+            border-radius: 3%;
+            width: 120px;
+            height: 120px;
+        }
+        video{
+            margin: 10px;
+            border: 3px solid #d3d3d3;
+            border-radius: 3%;
+            width: 120px;
+            height: 120px;            
+        }
+    }
+}

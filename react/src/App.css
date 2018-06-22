@@ -1,0 +1,27 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+*{
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Nanum Gothic", sans-serif;
+}
+
+a{
+    text-decoration: none;
+}
+
+input{
+    font-weight: 450;
+    color: #999;
+    border:1px solid #d3d3d3;
+    background-color: #f6f6f6;
+    border-radius: 3px;
+}
+
+html, body {
+    margin: 0;
+    background-color: #f6f6f6;
+    box-sizing: border-box;
+}

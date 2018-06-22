@@ -1,0 +1,86 @@
+.followingRecommend{
+    border: 1px solid #d3d3d3;
+    border-radius: 1%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .top{
+        height: 52px;
+        width: 93%;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        div{
+            display: inline;
+        }
+        div:nth-child(1){
+            color: #999;
+            font-size: 15px;
+            font-weight: 700;
+        }
+        div:nth-child(2){
+            color: #3897f0;
+            font-size: 13px;
+            font-weight: 900;
+        }
+    }
+    .main{
+        width: 93%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 19px;
+        .user{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            border: 1px solid #d3d3d3;
+            border-radius: 1%;
+            width: 176px;
+            height: 210px;
+            .xImg{ 
+                align-self: flex-end;
+                margin: 10px 10px 0 0;
+                cursor: pointer;
+                width: 11px;
+                height: 11px;
+            }
+            .profilePhoto-container{
+                img{
+                    width: 84px;
+                    height: 84px;
+                }
+            }
+            .userSet{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-size: 14px;
+                font-weight: 550;
+                .nick{
+                    color: #262626;
+                    margin-bottom: 3px;
+                }
+                .name{
+                    color: #999;
+                }
+                margin-bottom: 10px;
+            }
+            .btnFollow{
+                cursor: pointer;
+                width: 134px;
+                height: 35px;
+                background-color: #3897f0;
+                border: 5px solid #3897f0;
+                border-radius: 4%;
+                color: #ffffff;
+                font-weight: 550;
+                font-size: 15px;
+                text-align: center;
+                margin-bottom: 10px;
+            }            
+        }
+    }
+}

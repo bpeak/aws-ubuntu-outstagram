@@ -1,0 +1,35 @@
+.compassHashtagsHeader{
+    height: 226px;
+    display: flex;
+    flex-direction: rows;
+    align-items: center;
+    .mostPopularPostImg-container{
+        img{
+            width: 172px;
+            height: 172px;
+            padding: 7px;
+            border: 1px solid rgb(211, 211, 211);
+            border-radius: 50%;
+            margin-right: 30px;
+        }
+    }
+    .textSet{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100px;
+        .hashtag{
+            font-size: 38px;
+            font-weight: 550;
+        }
+        .postsCount{
+            font-size: 17px;
+            span{
+                margin: 5px;
+            }
+            span:nth-child(2){
+                font-weight: 600;
+            }
+        }
+    }
+}

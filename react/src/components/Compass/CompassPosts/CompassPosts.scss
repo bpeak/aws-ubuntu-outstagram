@@ -1,0 +1,17 @@
+.compassPosts{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .text{
+        display: block;
+        color: #999;
+        font-size: 16px;
+        font-weight: 600;
+        width: 100%;
+        margin: 10px 0 10px 0;
+    }
+    .compassPost{
+        
+    }
+}
