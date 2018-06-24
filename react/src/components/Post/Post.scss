@@ -16,6 +16,7 @@ $border-color : #d3d3d3;
 }
 
 .post-article-header{
+    padding-left: 7px;
     height: 60px;
     display: flex;
     align-items: center;
@@ -78,5 +79,10 @@ $border-color : #d3d3d3;
         display: flex;
         align-items: center;
         justify-content: flex-end;
-    }        
+    }
+}
+
+.post-article-likesCount-container{
+    padding-left: 7px;
+    margin-bottom: 7px;
 }

@@ -1,0 +1,44 @@
+.profileMyHeader{
+    display: flex;
+    flex-direction: row;
+    .__left{
+        width: 35%;
+        border: 1px solid purple;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .__profilePhoto-container{
+            img{
+                width: 180px;
+                height: 180px;
+            }
+        }
+    }
+    .__right{
+        width: 65%;
+        border: 1px solid blue;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        .__top{
+            height: 50px;
+            display: flex;
+            align-items: center;
+            .__content{
+                margin-right: 10px;
+            }
+        }
+        .__mid{
+
+        }
+        .__bottom{
+            span{
+                font-size: 18px;
+                font-weight: 600;
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+.profileUserBoradAndFollow{
+    span{
+        margin-right: 40px;
+        font-size: 17px;
+        font-weight: 500;
+        color: #262626;
+    }
+    span:nth-child(2){
+        cursor: pointer;
+    }
+    span:nth-child(3){
+        cursor: pointer;
+    }
+}

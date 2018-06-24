@@ -14,5 +14,8 @@ module.exports = (express, conn, path) => {
     const compass = require('./compass.js')(express, conn, path)
     api.use('/compass', compass)
 
+    const users = require('./users.js')(express, conn)
+    api.use('/users', users)
+
 	return api
 }

@@ -6,7 +6,7 @@ import './PostBalloon.scss'
 
 const PostBalloon = () => {
     return (
-        <img className="postBalloon" src={balloonImg}/>
+        <img onClick={() => {console.log(123)}} className="postBalloon" src={balloonImg}/>
     )
 }
 

@@ -7,7 +7,7 @@ import Home from '~routes/Home.js'
 import PostWrite from '~routes/PostWrite/PostWrite.js'
 import Compass from '~routes/Compass/Compass.js'
 import CompassHashtags from '~routes/CompassHashtags/CompassHashtags.js'
-import Profile from '~routes/Profile.js'
+import Profile from '~routes/Profile/Profile.js'
 import RePassport from '~routes/RePassport.js'
 import NoMatch from '~routes/NoMatch.js'
 
@@ -24,7 +24,7 @@ class App extends Component{
                         <Route exact path="/Compass" component={Compass}/>
                         <Route exact path="/Compass/hashtags/:hashtag" component={CompassHashtags}/>
                         <Route exact path="/RePassport" component={RePassport}/>
-                        <Route exact path="/:user_nick" component={Profile}/>
+                        <Route exact path="/profile/:nick" component={Profile}/>
                         <Route component={NoMatch}/>
                     </Switch>
                 </Fragment>

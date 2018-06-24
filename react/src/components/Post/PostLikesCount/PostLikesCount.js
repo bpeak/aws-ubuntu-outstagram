@@ -1,8 +1,11 @@
 import React from 'react';
 
+//scss
+import './PostLikesCount.scss'
+
 const PostLikesCount = ({count}) => {
     return (
-        <div>좋아요 15개</div>
+        <div className="postLikesCount">좋아요 {count}개</div>
     )
 }
 

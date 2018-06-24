@@ -45,6 +45,7 @@ module.exports = (express, conn, path) => {
         //3) posts 해당 users profilePhoto 검색 && 좋아요 여부 셋팅
         
         connPromise((err, db, mongo) => {
+            //err 컨트롤 필요
             //followings 검색
             const nick = req.session.user.nick
             const query = { nick }
@@ -138,19 +139,19 @@ module.exports = (express, conn, path) => {
     
     posts.post('/comment', (req, res) => {
         conn((err, db, mongo) => {
-            const postObjectId = mongo.ObjectId(req.body.postId)
-            const content = req.body.user_input_postComment
-            const nick = req.session.user.nick
-            const isoDate = new Date().toISOString()
-            const comment = {
-                nick,
-                content,
-                date : isoDate
-            }
-            console.log(comment.nick)
             if(err){
                 console.log(err)
             } else {
+                const postObjectId = mongo.ObjectId(req.body.postId)
+                const content = req.body.user_input_postComment
+                const nick = req.session.user.nick
+                const isoDate = new Date().toISOString()
+                const comment = {
+                    nick,
+                    content,
+                    date : isoDate
+                }
+                console.log(comment)            
                 const field = { _id : postObjectId }
                 const query = { $push: { comments : comment} }
                 db.collection('posts').update(field, query)

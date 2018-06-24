@@ -1,0 +1,28 @@
+.postComments{
+    padding-left: 7px;
+}
+.postComment{
+    margin-bottom: 7px;
+    font-size: 15px;
+    .__nick{
+        font-weight: 600;
+        margin-right: 5px;
+    }
+    .__content{
+        display: inline;
+        font-weight: 400;
+    }
+    .__longContent{
+        button{
+            border: none;
+            outline: none;
+
+            background-color: #ffffff;
+            color: #999;
+
+            font-weight: 500;
+
+            cursor: pointer;
+        }
+    }
+}

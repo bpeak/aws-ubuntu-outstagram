@@ -1,8 +1,12 @@
 import React from 'react';
 
+//scss
+import './PostCommentInput.scss'
+
 const PostForm = ({handler}) => {
     return (
-        <input
+        <input 
+            className="postCommentInput"
             onKeyPress={handler}
             type="text"
             placeholder="댓글 달기..."

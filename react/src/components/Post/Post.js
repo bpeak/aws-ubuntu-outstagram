@@ -25,76 +25,104 @@ class Post extends Component {
     constructor(props){
         super(props)
         this.state = {
-            contentsCount : this.props.contents.length,
-            contentsIndex : 0,
-            contentsMouseEnter : false,
-            like : props.likes.indexOf(store.getState().user.nick) === -1 ? false : true,
-            comments : this.props.comments
+            contents : {
+                count : props.contents.length,
+                index : 0,
+                isMouseEntered : false
+            },
+            likes : {
+                count : props.likes.length,
+                isLiked : props.likes.indexOf(store.getState().user.nick) === -1 ? false : true
+            },
+            comments : props.comments
         }
     }
 
     _handleOnArrowLeftClick = () => {
-        const { contentsCount, contentsIndex } = this.state
-        if(contentsIndex !== 0){
+        const { contents } = this.state
+        if(contents.Index !== 0){
             this.setState({
                 ...this.state,
-                contentsIndex : this.state.contentsIndex - 1
+                contents : {
+                    ...this.state.contents,
+                    index : this.state.contents.index - 1
+                }
             })
-        } else {
-            //done
         }
     }
 
     _handleOnArrowRightClick = () => {
-        const { contentsCount, contentsIndex } = this.state
-        if(contentsIndex < contentsCount - 1){
+        const { contents } = this.state
+        if(contents.index < contents.count - 1){
             this.setState({
                 ...this.state,
-                contentsIndex : this.state.contentsIndex + 1
+                contents : {
+                    ...this.state.contents,
+                    index : this.state.contents.index + 1
+                }
             })
-        } else {
-            //done
         }
     }
 
     _handleOnContentsMouseEnter = () => {
         this.setState({
             ...this.state,
-            contentsMouseEnter : true
+            contents : {
+                ...this.state.contents,
+                isMouseEntered : true
+            }
         })
     }
 
     _handleOnContentsMouseLeave = () => {
         this.setState({
             ...this.state,
-            contentsMouseEnter : false
+            contents : {
+                ...this.state.contents,
+                isMouseEntered : false
+            }
         })
     }
 
     _handleOnLikeClick = () => {
-        const currentLike = this.state.like
-        this.setState({
-            ...this.state,
-            like : !currentLike
-        })
-        let method;
-        if(currentLike){
+        const { isLiked } = this.state.likes
+        let method
+        let counter
+        if(isLiked){
             method = 'DELETE'
+            counter = -1
         } else {
             method = 'PUT'
+            counter = +1
         }
+        this.setState({
+            ...this.state,
+            likes : {
+                ...this.state.likes,
+                isLiked : !isLiked,
+                count : this.state.likes.count + counter
+            }
+        })
 
-        const currentPostId = this.props._id
-        fetch(`/api/posts/like/${this.props._id}`, {
+        const { _id } = this.props
+        fetch(`/api/posts/like/${_id}`, {
             method,
             credentials: "same-origin"
         })
     }
 
-    _handleOnCommentInnputKeyPress = (e) => {
-        if(e.key === 'Enter' && e.target.value !== ''){
+    _handleOnBallonClick = () => {
+
+    }
+
+    _handleOnCommentInputKeyPress = (e) => {
+        if(
+            e.key === 'Enter' && 
+            e.target.value !== ''
+        ){
+            const { _id } = this.props
             const request = {
-                postId : this.props._id,
+                postId : _id,
                 user_input_postComment : e.target.value
             }
             fetch('api/posts/comment', {
@@ -137,13 +165,13 @@ class Post extends Component {
                     onMouseEnter={this._handleOnContentsMouseEnter} 
                     onMouseLeave={this._handleOnContentsMouseLeave}
                 >
-                    <PostContent content={contents[this.state.contentsIndex]}/>
-                    {this.state.contentsMouseEnter === true &&
+                    <PostContent content={contents[this.state.contents.index]}/>
+                    {this.state.contents.isMouseEntered === true &&
                         <Fragment>
-                            {this.state.contentsIndex !== 0 && 
+                            {this.state.contents.index !== 0 && 
                                 <PostArrow.left handler={this._handleOnArrowLeftClick}/>
                             }
-                            {this.state.contentsIndex !== this.state.contentsCount - 1 && 
+                            {this.state.contents.index !== this.state.contents.count - 1 && 
                                 <PostArrow.right handler={this._handleOnArrowRightClick}/>
                             }
                         </Fragment>
@@ -153,15 +181,15 @@ class Post extends Component {
                     <div className="post-article-icons-container">
                         <div>
                             <PostLike 
-                                like={this.state.like}
+                                like={this.state.likes.isLiked}
                                 handleOnLikeClick={this._handleOnLikeClick}
                             />
                             <PostBalloon/>                        
                         </div>
                         <div>
                             {contents.map((content, index) => {
-                                let selected;
-                                if(index === this.state.contentsIndex){
+                                let selected
+                                if(index === this.state.contents.index){
                                     selected = true
                                 } else {
                                     selected = false
@@ -174,14 +202,14 @@ class Post extends Component {
                         </div>
                     </div>
                     <div className="post-article-likesCount-container">
-                        <PostLikesCount/>
+                        <PostLikesCount count={this.state.likes.count}/>
                     </div>
-                    <div>
+                    <div className="post-article-comments-container">
                         <PostComments comments={this.state.comments}/>
                     </div>
                     <div className="post-article-form">
                         <PostCommentInput
-                            handler={this._handleOnCommentInnputKeyPress}
+                            handler={this._handleOnCommentInputKeyPress}
                         />
                     </div>
                 </section>

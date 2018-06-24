@@ -8,6 +8,10 @@ import IconPostWriteImg from '~img/post/write.png'
 
 import imgs from '../../img/img.js'
 
+//store
+import store from '~redux/reducers/store.js'
+
+//scss
 import './Header.scss';
 
 const Header = () => {
@@ -60,8 +64,10 @@ const IconCompass = () => {
     )
 }
 const IconProfile = () => {
+    const nick = store.getState().user.nick
+    const url = `/profile/${nick}`
     return (
-        <Link to="/profile">
+        <Link to={url}>
             <img className="header__icon_right" src={imgs.profile}/>
         </Link>
     )
