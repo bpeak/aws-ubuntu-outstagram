@@ -17,11 +17,6 @@ const session = require('express-session')
 //middlewares
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
-//routes
-const auth = require('./server/routes/auth.js')(express, conn, path)
-const api = require('./server/routes/api.js')(express, conn, path)
-
 app.use(session({
     secret: '@!@$$%&$@$TFGHJGJ&^%U$T',
     resave: false, //변경사항없을시에도 언제나 재저장여부 => 권장값 false
@@ -29,7 +24,11 @@ app.use(session({
     cookie: {
         maxAge: ( 1000 * 60 * 60 ) * 12
     }
-  }))
+}))
+
+//routes
+const auth = require('./server/routes/auth.js')(express, conn, path)
+const api = require('./server/routes/api')(express, conn, path)
 
 app.use('/auth', auth)
 app.use('/api', api)

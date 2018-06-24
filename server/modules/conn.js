@@ -5,12 +5,10 @@ const dbName = 'outstagram'
 const connPromise = (callback) => {
     mongo.MongoClient.connect(url, (err, client) => {
         if(err){
-            callback(err)
+            callback(err, null, null)
         } else {
             const db = client.db(dbName);
             callback(null, db, mongo)
-
-            //db클로즈언제하지
         }
     })
 }

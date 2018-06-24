@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 
-import './Post.scss'
-
+//components
 import PostProfilePhoto from './PostProfilePhoto/PostProfilePhoto.js'
 import PostNick from './PostNick/PostNick.js'
 
@@ -16,9 +15,12 @@ import PostLikesCount from './PostLikesCount/PostLikesCount.js'
 
 import PostComments from './PostComments/PostComments.js'
 import PostCommentInput from './PostCommentInput/PostCommentInput.js'
-//스토어에서 내 닉 가져와서
-//그게 포스트의 라이크에 잇는지 검증한후에 잇으면 트루 없으면 폴스
-//ok ?
+
+//store
+import store from '~redux/reducers/store.js'
+//scss
+import './Post.scss'
+
 class Post extends Component {
     constructor(props){
         super(props)
@@ -26,7 +28,7 @@ class Post extends Component {
             contentsCount : this.props.contents.length,
             contentsIndex : 0,
             contentsMouseEnter : false,
-            like : false,
+            like : props.likes.indexOf(store.getState().user.nick) === -1 ? false : true,
             comments : this.props.comments
         }
     }
