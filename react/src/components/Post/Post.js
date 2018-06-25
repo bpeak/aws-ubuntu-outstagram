@@ -83,6 +83,14 @@ class Post extends Component {
             }
         })
     }
+    
+    _handleOnContentsDoubleClick = () => {
+        this._handleOnLikeClick()
+    }
+
+    _test = () => {
+        console.log('test')
+    }
 
     _handleOnLikeClick = () => {
         const { isLiked } = this.state.likes
@@ -164,6 +172,7 @@ class Post extends Component {
                     className="post-article-contents"
                     onMouseEnter={this._handleOnContentsMouseEnter} 
                     onMouseLeave={this._handleOnContentsMouseLeave}
+                    onDoubleClick={this._handleOnContentsDoubleClick}
                 >
                     <PostContent content={contents[this.state.contents.index]}/>
                     {this.state.contents.isMouseEntered === true &&

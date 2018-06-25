@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 //components
 import ProfileMyHeader from '~components/Profile/ProfileMyHeader.js'
+import ProfileMyContents from '~components/Profile/ProfileMyContents.js'
 
 //scss 
 import './ProfileMy.scss'
@@ -29,7 +30,9 @@ class ProfileMy extends Component {
                    />
                 </header>
                 <section>
-                    콘텐뚜
+                    <ProfileMyContents
+                        posts={posts}
+                    />
                 </section>
             </div>
         )

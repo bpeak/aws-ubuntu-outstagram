@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react';
 //components
 import ProfileMy from './ProfileMy/ProfileMY.js'
 import ProfileOther from '~components/Profile/ProfileOther.js'
+import LoadingSpinner from '~components/LoadingSpinner/LoadingSpinner.js'
 
 //store
 import store from '~redux/reducers/store.js'
@@ -49,7 +50,7 @@ class Profile extends Component {
                                 : <ProfileOther user={this.state.user}/>
                             }
                         </Fragment>
-                        : <div>여기로딩스피너</div>
+                        : <LoadingSpinner/>
                     }
                 </main>
             </div>
