@@ -14,9 +14,20 @@ const getTextExceptSharp = (hashtags) => {
     return hashtagsExceptSharp
 }
 
+const discriminator = (text) => {
+    const pattern = /#[^#\s,;]+/gm
+    const result = /#[^#\s,;]+/gm.exec(text)
+    if(result === null){
+        return false
+    } else {
+        return true
+    }
+}
+
 const hashtagController = {
     extract,
-    getTextExceptSharp
+    getTextExceptSharp,
+    discriminator
 }
 
 export default hashtagController

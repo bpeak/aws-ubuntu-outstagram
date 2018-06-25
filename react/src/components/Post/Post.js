@@ -160,7 +160,8 @@ class Post extends Component {
             profilePhotoUrl,
             nick,
             contents,
-            description
+            description,
+            comments
         } = this.props
         console.log(description)
         return(
@@ -218,10 +219,11 @@ class Post extends Component {
                         <PostDescription
                             nick={nick}
                             description={description}
+                            comments={comments}
                         />
                     </div>
                     <div className="post-article-comments-container">
-                        <PostComments comments={this.state.comments}/>
+                        <PostComments comments={comments}/>
                     </div>
                     <div className="post-article-form">
                         <PostCommentInput
