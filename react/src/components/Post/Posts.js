@@ -50,7 +50,7 @@ class Posts extends Component{
             const request = {
                 postsCurrentIdList
             }
-            fetch('api/posts/main', {
+            fetch('/api/posts/get/main', {
                 method : "POST",
                 headers : {
                     'content-type' : 'application/json'
@@ -145,6 +145,7 @@ class Posts extends Component{
                                     nick={post.nick}
                                     profilePhotoUrl={post.profilePhotoUrl}
                                     contents={post.contents}
+                                    description={post.description}
                                     likes={post.likes}
                                     comments={post.comments}
                                 />

@@ -17,5 +17,11 @@ module.exports = (express, conn, path) => {
     const users = require('./users.js')(express, conn)
     api.use('/users', users)
 
+    const likes = require('./likes.js')(express, conn)
+    api.use('/likes', likes)
+
+    const comment = require('./comment.js')(express, conn)
+    api.use('/comment', comment)
+
 	return api
 }

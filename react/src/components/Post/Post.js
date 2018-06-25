@@ -12,7 +12,7 @@ import PostBalloon from './PostBalloon/PostBalloon.js'
 import PostDots from './PostDots/PostDots.js'
 import PostFlag from './PostFlag/PostFlag.js'
 import PostLikesCount from './PostLikesCount/PostLikesCount.js'
-
+import PostDescription from './PostDescription/PostDescription.js'
 import PostComments from './PostComments/PostComments.js'
 import PostCommentInput from './PostCommentInput/PostCommentInput.js'
 
@@ -113,7 +113,7 @@ class Post extends Component {
         })
 
         const { _id } = this.props
-        fetch(`/api/posts/like/${_id}`, {
+        fetch(`/api/likes/like/${_id}`, {
             method,
             credentials: "same-origin"
         })
@@ -131,9 +131,9 @@ class Post extends Component {
             const { _id } = this.props
             const request = {
                 postId : _id,
-                user_input_postComment : e.target.value
+                user_input_comment : e.target.value
             }
-            fetch('api/posts/comment', {
+            fetch('/api/comment', {
                 method : "POST",
                 headers : {
                     'content-type' : 'application/json'
@@ -160,8 +160,9 @@ class Post extends Component {
             profilePhotoUrl,
             nick,
             contents,
-            likes
+            description
         } = this.props
+        console.log(description)
         return(
             <article className="post-article">
                 <header className="post-article-header">
@@ -212,6 +213,12 @@ class Post extends Component {
                     </div>
                     <div className="post-article-likesCount-container">
                         <PostLikesCount count={this.state.likes.count}/>
+                    </div>
+                    <div>
+                        <PostDescription
+                            nick={nick}
+                            description={description}
+                        />
                     </div>
                     <div className="post-article-comments-container">
                         <PostComments comments={this.state.comments}/>

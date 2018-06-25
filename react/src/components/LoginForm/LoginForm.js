@@ -84,7 +84,7 @@ class LoginForm extends Component{
                         <Fragment>
                             <form onSubmit={this._handleOnLoginSubmit}>
                                 <input className="loginForm-input" onChange={this._handleOnIdChange} value={this.state.user_input_id} placeholder="휴대폰 번호 또는 이메일주소"/>
-                                <input className="loginForm-input" onChange={this._handleOnPwChange} value={this.state.user_input_pw} placeholder="비밀번호"/>
+                                <input className="loginForm-input" onChange={this._handleOnPwChange} value={this.state.user_input_pw} placeholder="비밀번호" type="password"/>
                                 <input disabled={isFetching === true || this.state.user_input_id === '' || this.state.user_input_pw === '' ? true : false } className="loginForm-btnSubmit" type="submit" value="로그인"/>
                             </form>
                             <span id="loginForm-span1">━━━━━━━ 또는 ━━━━━━━</span>
