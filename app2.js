@@ -8,5 +8,5 @@ app.listen(PORT, () => {
 })
 
 app.get('*', (req, res) => {
-    res.send('191')
+    res.send('101')
 })
