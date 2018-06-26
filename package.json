@@ -5,6 +5,7 @@
     "license": "MIT",
     "private": true,
     "scripts": {
+        "start": "node app2.js",
         "build-react": "webpack -w",
         "start-server": "supervisor ./server/app.js"
     },
