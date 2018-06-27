@@ -1,8 +1,28 @@
-.postComment{
-    .__nick{
+.postComments{
+    padding-left: 7px;
+}
 
+.postComment{
+    margin-bottom: 7px;
+    font-size: 15px;
+    .__nick{
+        color: #262626;
+        font-weight: 600;
+        margin-right: 5px;        
     }
     .__content{
+        font-weight: 500;
         display: inline;
     }
+}
+
+.postCommentWord{
+    margin-right: 5px;
+}
+.postCommentWord.normal{
+    color: #262626;
+}
+.postCommentWord.hashtag{
+    color: #002db3;
+    cursor: pointer;
 }

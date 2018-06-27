@@ -27,6 +27,16 @@ app.use(session({
         maxAge: ( 1000 * 60 * 60 ) * 12
     }
 }))
+
+app.use('*', (req, res, next) => {
+    const user = {
+        nick : 'bpeak',
+        id : 'bpeak'
+    }
+    req.session.user = user
+    next()
+})
+
 app.use('/auth', auth)
 app.use('/api', api)
 app.use('/public', express.static('./react/public'))

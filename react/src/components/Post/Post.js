@@ -13,7 +13,7 @@ import PostDots from './PostDots/PostDots.js'
 import PostFlag from './PostFlag/PostFlag.js'
 import PostLikesCount from './PostLikesCount/PostLikesCount.js'
 import PostDescription from './PostDescription/PostDescription.js'
-import PostComments from './PostComments/PostComments.js'
+//import PostComments from './PostComments/PostComments.js'
 import PostCommentInput from './PostCommentInput/PostCommentInput.js'
 
 //store
@@ -34,7 +34,10 @@ class Post extends Component {
                 count : props.likes.length,
                 isLiked : props.likes.indexOf(store.getState().user.nick) === -1 ? false : true
             },
-            comments : props.comments
+            comment : {
+                comments : props.comments,
+                isFetching : false
+            }
         }
     }
 
@@ -123,15 +126,23 @@ class Post extends Component {
 
     }
 
-    _handleOnCommentInputKeyPress = (e) => {
-        if(
-            e.key === 'Enter' && 
-            e.target.value !== ''
-        ){
-            const { _id } = this.props
+    _fetchCommentStart = () => {
+        return new Promise((resolve, reject) => {
+            this.setState({
+                ...this.state,
+                comment : {
+                    ...this.state.comment,
+                    isFetching : true
+                }
+            }, () => { resolve() })
+        })
+    }
+
+    _fetchComment = (postId, comment) => {
+        return new Promise((resolve, reject) => {
             const request = {
-                postId : _id,
-                user_input_comment : e.target.value
+                postId,
+                user_input_comment : comment
             }
             fetch('/api/comment', {
                 method : "POST",
@@ -143,14 +154,37 @@ class Post extends Component {
             })
             .then(data => data.json())
             .then(json => JSON.parse(json))
-            .then(response => {
-                this.setState({
-                    ...this.state,
-                    comments : [
-                        ...this.state.comments,
-                        response.comment
-                    ]
-                })
+            .then(response => resolve(response.comment))
+        })
+    }
+
+    _setComment = (comment) => {
+        this.setState({
+            ...this.state,
+            comment : {
+                ...this.state.comment,
+                comments : [
+                    ...this.state.comment.comments,
+                    comment
+                ],
+                isFetching : false
+            }
+        })
+    }
+
+    _handleOnCommentInputKeyPress = (e) => {
+        if(
+            e.key === 'Enter' && 
+            e.target.value !== ''
+        ){
+            const postId = this.props._id
+            const comment = e.target.value
+            this._fetchCommentStart()
+            .then(() => {
+                return this._fetchComment(postId, comment)
+            })
+            .then(comment => {
+                this._setComment(comment)
             })
         }
     }
@@ -160,10 +194,8 @@ class Post extends Component {
             profilePhotoUrl,
             nick,
             contents,
-            description,
-            comments
+            description
         } = this.props
-        console.log(description)
         return(
             <article className="post-article">
                 <header className="post-article-header">
@@ -219,15 +251,16 @@ class Post extends Component {
                         <PostDescription
                             nick={nick}
                             description={description}
-                            comments={comments}
+                            comments={this.state.comment.comments}
                         />
                     </div>
-                    <div className="post-article-comments-container">
+                    {/* <div className="post-article-comments-container">
                         <PostComments comments={comments}/>
-                    </div>
+                    </div> */}
                     <div className="post-article-form">
                         <PostCommentInput
                             handler={this._handleOnCommentInputKeyPress}
+                            isFetching={this.state.comment.isFetching}
                         />
                     </div>
                 </section>

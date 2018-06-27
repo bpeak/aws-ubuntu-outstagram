@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    .top{
+    .__top{
         height: 52px;
         width: 93%;
 
@@ -26,7 +26,7 @@
             font-weight: 900;
         }
     }
-    .main{
+    .__main{
         width: 93%;
         display: flex;
         justify-content: space-between;

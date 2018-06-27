@@ -1,0 +1,34 @@
+.postModal-wrapper{
+    width: 100%;
+    height: 100%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0, 0.7)	
+}
+
+.postModal{
+    padding-top: 30px;
+    background-color: #d3d3d3;
+    width: 630px;
+    display: flex;
+    justify-content: center;
+    height: calc(100vh - 100px);
+    overflow: auto;
+    // width: 935px;
+    // height: 600px;
+    // background-color: #ffffff;
+
+    // display: flex;
+    // flex-direction: row;
+    // section.__left{
+    //     width: 600px;
+    //     height: 100%;
+    //     background-color: red;
+    // }
+    // section.__right{
+    //     width: 335px;
+    //     height: 100%;
+    // }
+}

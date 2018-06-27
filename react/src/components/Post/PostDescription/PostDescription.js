@@ -23,7 +23,7 @@ class PostDescription extends Component{
         }
         const mergedComments = [authorComment, ...comments]
         return (
-            <div>
+            <div className="postComments">
                 {mergedComments.map((comment, index) => {
                     return (
                         <PostComment
@@ -43,32 +43,37 @@ const PostComment = ({nick, content}) => {
     const test = contentWords.map((contentWord, index) => {
         if(hashtagController.discriminator(contentWord) === true){
             return (
-                <PostCommentHashtagWord hashtag={contentWord}/>
+                <PostCommentHashtagWord key={index} hashtag={contentWord}/>
             )
         } else {
             return (
-                <PostCommentNormalWord text={contentWord}/>
+                <PostCommentNormalWord key={index} text={contentWord}/>
             )
         }
     })
+    const url = `/profile/${nick}`
     return (
         <div className="postComment">
-            <Link to="/tes" className="__nick">{nick}</Link>
-            <div className="__content">{content}</div>
-            <div>{test}</div>
+            <Link to={url} className="__nick">{nick}</Link>
+            <div className="__content">{test}</div>
         </div>
     )
 }
 
 const PostCommentHashtagWord = ({hashtag}) => {
+    const pattern = /#/
+    const hashtagExceptSharp = hashtag.replace(pattern, '')
+    const url = `/compass/hashtags/${hashtagExceptSharp}`
     return (
-        <Link to="/">{hashtag}</Link>
+        <Link className="postCommentWord hashtag" to={url}>
+            {hashtag}
+        </Link>
     )
 }
 
 const PostCommentNormalWord = ({text}) => {
     return (
-        <span>
+        <span className="postCommentWord nomal">
             {text}
         </span>
     )

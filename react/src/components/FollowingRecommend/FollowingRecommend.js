@@ -29,14 +29,19 @@ class FollowingRecommend extends Component {
             ]
         }
     }
+
+    _handleOnBtnFollowClick = () => {
+        console.log(123)
+    }
+
     render() {
         return (
             <div className="followingRecommend">
-                <div className="top">
+                <div className="__top">
                     <div>회원님을 위한 추천</div>
                     <div>모두 보기</div>
                 </div>
-                <div className="main">
+                <div className="__main">
                     {this.state.followingRecommendList.map((user, index) => {
                         return (
                             <div className="user" key={index}>
@@ -48,7 +53,10 @@ class FollowingRecommend extends Component {
                                     <div className="nick">{user.nick}</div>
                                     <div className="name">{user.name}</div>                                    
                                 </div>
-                                <button className="btnFollow">팔로우</button>
+                                <button
+                                    onClick={this._handleOnBtnFollowClick}
+                                    className="btnFollow">팔로우
+                                </button>
                              </div>
                         )
                     })}
