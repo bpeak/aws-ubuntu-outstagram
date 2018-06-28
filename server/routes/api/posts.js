@@ -101,5 +101,20 @@ module.exports = (express, conn, path) => {
         console.log('df')
     })
 
+    posts.post('/save', (req, res) => {
+        conn((err, db, mongo) => {
+            if(err){
+                console.log(err)
+            } else {
+                const postId = req.body.postId
+                const nick = req.session.user.nick
+                
+                const field = { nick }
+                const query = { $addToSet: { flags : postId }}
+                db.collection('users').update(field, query)
+            }
+        })
+    })
+
     return posts
 }

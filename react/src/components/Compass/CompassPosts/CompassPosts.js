@@ -11,6 +11,7 @@ class CompassPosts extends Component{
 
         }
     }
+
     render(){
         return(
             <Fragment>
@@ -19,9 +20,11 @@ class CompassPosts extends Component{
                     ? <div className="text">게시물이 존재하지 않습니다.</div>
                     : <div className="text">인기 게시물</div>
                 }
-                {this.props.posts.map((post, index) => {
-                    return <CompassPost key={index} post={post}/>
-                })}
+                <div className="compassPost-container">
+                    {this.props.posts.map((post, index) => {
+                        return <CompassPost key={index} post={post}/>
+                    })}
+                </div>
             </div>
             </Fragment>
         )

@@ -37,6 +37,9 @@ class Post extends Component {
             comment : {
                 comments : props.comments,
                 isFetching : false
+            },
+            flag : {
+                isSaved : false
             }
         }
     }
@@ -189,6 +192,28 @@ class Post extends Component {
         }
     }
 
+    _handleOnFlagClick = () => {
+        this.setState({
+            ...this.state,
+            flag : {
+                ...this.state.flag,
+                isSaved : !this.state.flag.isSaved
+            }
+        }, () => {
+            const request = {
+                postId : this.props._id
+            }
+            fetch('/api/posts/save', {
+                method : "POST",
+                headers : {
+                    "content-type" : "application/json"
+                },
+                body : JSON.stringify(request),
+                credentials: "same-origin"
+            })
+        })
+    }
+
     render(){
         const { 
             profilePhotoUrl,
@@ -241,7 +266,10 @@ class Post extends Component {
                             })}
                         </div>
                         <div>
-                            <PostFlag/>
+                            <PostFlag
+                                handleOnClick={this._handleOnFlagClick}
+                                isSaved={this.state.flag.isSaved}
+                            />
                         </div>
                     </div>
                     <div className="post-article-likesCount-container">

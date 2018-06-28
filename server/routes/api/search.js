@@ -5,6 +5,7 @@ const getClassifiedPosts = (posts, pattern) => {
     //     달 : [post1, post2, post3 ...]
     //     별 : [...]
     // }
+    console.log([posts.length, '포스트길이는 ?'])
     for(let i = 0; i < posts.length; i++){
         for(let j = 0; j < posts[i].hashtags.length; j++){
             if(pattern.exec(posts[i].hashtags[j]) === null){
@@ -16,13 +17,17 @@ const getClassifiedPosts = (posts, pattern) => {
                     //분류카테고리 미존재 => 생성후 푸시
                     classifiedPostsObj[posts[i].hashtags[j]] = []
                     classifiedPostsObj[posts[i].hashtags[j]].push(posts[i])
+                    break
                 } else {
                     //분류카테고리 존재 => 푸시
                     classifiedPostsObj[posts[i].hashtags[j]].push(posts[i])
+                    break
                 }
             }
         }
     }
+
+    console.log(classifiedPostsObj)
 
     //classifiedPostsObj key 가나다순 재배열
     const orderedHashtags = Object.keys(classifiedPostsObj).sort()
@@ -56,6 +61,7 @@ module.exports = (express, conn, path) => {
                 let cursor = db.collection('posts').find(query)
                 cursor.toArray()
                 .then(results => {
+                    console.log(results.length)
                     const classifiedPosts =  getClassifiedPosts(results, pattern)
                     response.classifiedPosts = classifiedPosts
                     //users

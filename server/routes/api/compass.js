@@ -8,11 +8,15 @@ module.exports = (express, conn, path) => {
                 console.log(err)
             } else {
                 let query = { hashtags : hashtag }
-                let cursor = db.collection('posts').find(query)                    
-                cursor.toArray()
-                .then(result => {
+                db.collection('posts')
+                .find(query)
+                .toArray()
+                .then(posts => {
+                    posts.sort((a, b) => {
+                        return a.likes.length <= b.likes.length
+                    })
                     const response = {
-                        posts : result
+                        posts : posts
                     }
                     res.json(JSON.stringify(response))
                 })

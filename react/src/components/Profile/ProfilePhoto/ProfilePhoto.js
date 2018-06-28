@@ -2,7 +2,7 @@ import React from 'react'
 
 import './ProfilePhoto.scss'
 
-import profilePhotoDefaultImg from '../../../img/profilePhotoDefault.png'
+import profilePhotoDefaultImg from '../../../img/profilePhotoDefault2.jpg'
 
 const ProfilePhoto = (props) => {
     return (

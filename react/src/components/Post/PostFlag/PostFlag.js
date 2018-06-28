@@ -1,14 +1,18 @@
 import React from 'react';
 
+//imgs
+import flagImg from '~img/post/flag.png'
+import savedFlagImg from '~img/post/savedFlag.png'
+
 //scss
 import './PostFlag.scss'
 
-//imgs
-import flagImg from '~img/post/flag3.png'
-
-const PostFlag = () => {
+const PostFlag = ({handleOnClick, isSaved}) => {
     return (
-        <img className="postFlag" src={flagImg}/>
+        <img 
+            onClick={handleOnClick} 
+            className="postFlag" 
+            src={isSaved === true ? savedFlagImg : flagImg}/>
     )
 }
 

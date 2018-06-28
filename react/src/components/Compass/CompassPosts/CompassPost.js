@@ -54,11 +54,15 @@ class CompassPost extends Component{
     }
 
     render(){
-        const { contents } = this.props.post
+        const { 
+            contents,
+            likes,
+            comments
+         } = this.props.post
         return(
             <div 
-                onClick={this._handleOnModalOpenClick}
                 className="compassPost"
+                onClick={this._handleOnModalOpenClick}
                 onMouseEnter={this._handleOnMouseEnter}
                 onMouseLeave={this._handleOnMouseLeave}
             >
@@ -75,11 +79,11 @@ class CompassPost extends Component{
                     <div className="icons">
                         <div className="icon">
                             <img className="iconHeart" src={heartImg}/>
-                            <span className="icon-text">100개</span>
+                            <span className="icon-text">{likes.length}개</span>
                         </div>
                         <div className="icon">
                             <img className="iconChat" src={chatImg}/>
-                            <span className="icon-text">13개</span>
+                            <span className="icon-text">{comments.length}개</span>
                         </div>
                     </div>
                 }

@@ -5,10 +5,11 @@ import sampleImg from '~img/slideShow/slide1.png'
 import './CompassHashtagsHeader.scss'
 
 const CompassHashtagsHeader = (props) => {
+    console.log(props.mostPopularPost, '인기짱')
     return (
         <div className="compassHashtagsHeader">
             <div className="mostPopularPostImg-container">
-                <img src={sampleImg}/>
+                <img src={props.mostPopularPost.contents[0].url}/>
             </div>
             <div className="textSet">
                 <div className="hashtag">

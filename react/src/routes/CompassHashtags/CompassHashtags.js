@@ -13,6 +13,7 @@ class CompassHashtags extends Component {
     constructor(props){
         super(props)
         this.state = {
+            mostPopularPost : undefined,
             hashtag : this.props.match.params.hashtag,
             isFetchingPosts : true,
             posts : []
@@ -32,7 +33,8 @@ class CompassHashtags extends Component {
                             ...this.state,
                             hashtag : newProps.match.params.hashtag,
                             isFetchingPosts : false,
-                            posts : response.posts
+                            posts : response.posts,
+                            mostPopularPost : this._getMostPopularPost(response.posts)
                         })
                     }
                 })
@@ -45,10 +47,12 @@ class CompassHashtags extends Component {
             if(err){
                 console.log(err)
             } else {
+                this._getMostPopularPost(response.posts)
                 this.setState({
                     ...this.state,
                     isFetchingPosts : false,
-                    posts : response.posts
+                    posts : response.posts,
+                    mostPopularPost : this._getMostPopularPost(response.posts)
                 }, console.log('셋스테이트완료'))
             }
         })
@@ -78,6 +82,14 @@ class CompassHashtags extends Component {
         .catch(err => callback(err, null))
     }
 
+    _getMostPopularPost = (posts) => {
+    return posts.reduce((previousPost, currentPost) => {
+            return (currentPost.likes.length >= previousPost.likes.length
+                ? currentPost
+                : previousPost
+            )
+        }, { likes : [] })
+    }
 
     render() {
         return (
@@ -90,7 +102,7 @@ class CompassHashtags extends Component {
                             <section className="header">
                                 <CompassHashtagsHeader 
                                     hashtag={this.state.hashtag}
-                                    mostPopularPostImg={undefined} //이거 제일 좋아요 많이눌러진포스트 이미지 넣어주면되
+                                    mostPopularPost={this.state.mostPopularPost} //이거 제일 좋아요 많이눌러진포스트 이미지 넣어주면되
                                     postsCount={this.state.posts.length}
                             />
                             </section>

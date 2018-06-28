@@ -5,16 +5,21 @@ const PORT = process.env.PORT || 80
 app.listen(PORT, () => {
     console.log(`PORT ${PORT} CONNECTED SUCCESS`)
 })
+
 global.__rootDir = __dirname
+
 //modules
 const path = require('path')
 const conn = require('./server/modules/mongo.js')()
 const bodyParser = require('body-parser')
 const session = require('express-session')
-
+const passport = require('passport')
 //routes
 const auth = require('./server/routes/auth.js')(express, conn, path)
 const api = require('./server/routes/api')(express, conn, path)
+///임시
+const auth2 = require('./server/routes/auth2.js')(express, conn, path)
+
 
 //middlewares
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -37,7 +42,7 @@ app.use('*', (req, res, next) => {
     next()
 })
 
-app.use('/auth', auth)
+app.use('/auth', auth2)
 app.use('/api', api)
 app.use('/public', express.static('./react/public'))
 app.use('/uploads', express.static('./server/uploads'))
