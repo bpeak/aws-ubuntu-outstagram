@@ -6,16 +6,16 @@ const upload = {}
 upload.profilePhoto = multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {
-            const id = req.session.user.id
-            const userDir = path.join(__rootDir, '/server/uploads/', id)
+            const nick = req.session.passport.user.nick
+            const userDir = path.join(__rootDir, '/server/uploads/', nick)
             uploadSystem.checkAndMakeDir(userDir)
             cb(null, userDir)
         },
         filename: function (req, file, cb) {
-            const id = req.session.user.id
+            const nick = req.session.passport.user.nick
             const ext = path.extname(file.originalname).toLowerCase()
             const fileName = 'profile' + ext
-            req.body.profilePhotoUrl = `/uploads/${id}/${fileName}`
+            req.body.profilePhotoUrl = `/uploads/${nick}/${fileName}`
             cb(null, fileName)
         }
     }),
@@ -32,9 +32,9 @@ upload.profilePhoto = multer({
 upload.postFile = multer({
     storage : multer.diskStorage({
         destination: (req, file, cb) => {
-            const id = req.session.user.id
+            const nick = req.session.passport.user.nick
             const fileType = uploadSystem.getFileType(file.originalname)
-            const userDir = path.join(__rootDir, '/server/uploads/', id)
+            const userDir = path.join(__rootDir, '/server/uploads/', nick)
             const postFileDir = path.join(userDir, fileType)
             uploadSystem.checkAndMakeDir(userDir)
             uploadSystem.checkAndMakeDir(postFileDir)
@@ -46,9 +46,9 @@ upload.postFile = multer({
             
 
             //req body 로 fileUrlForDB 값 pass
-            const id = req.session.user.id
+            const nick = req.session.passport.user.nick
             const fileType = uploadSystem.getFileType(file.originalname)
-            const fileUrlForDB = `/uploads/${id}/${fileType}/${uniqueFileName}`
+            const fileUrlForDB = `/uploads/${nick}/${fileType}/${uniqueFileName}`
             const content = {
                 type : fileType,
                 url : fileUrlForDB

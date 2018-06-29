@@ -88,7 +88,8 @@ class LoginForm extends Component{
                                 <input disabled={isFetching === true || this.state.user_input_id === '' || this.state.user_input_pw === '' ? true : false } className="loginForm-btnSubmit" type="submit" value="로그인"/>
                             </form>
                             <span id="loginForm-span1">━━━━━━━ 또는 ━━━━━━━</span>
-                            <span className="loginForm-span2">Facebook으로 로그인</span>
+                            <a href="/auth/facebook" className="loginForm-span2">Facebook으로 로그인</a>
+                            <a href="/auth/kakao" className="loginForm-span2">KakaoTalk로 로그인</a>
                             {errorMsg !== '' && <span id="loginForm-errorMsg">{errorMsg}</span>}
                             <span className="loginForm-span2">비밀번호를 잊으셧나요?</span>
                         </Fragment>

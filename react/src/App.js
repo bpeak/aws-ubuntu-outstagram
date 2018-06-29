@@ -9,6 +9,7 @@ import Compass from '~routes/Compass/Compass.js'
 import CompassHashtags from '~routes/CompassHashtags/CompassHashtags.js'
 import Profile from '~routes/Profile/Profile.js'
 import RePassport from '~routes/RePassport.js'
+import SocialLogin from '~routes/SocialLogin/SocialLogin.js'
 import NoMatch from '~routes/NoMatch.js'
 
 
@@ -25,6 +26,7 @@ class App extends Component{
                         <Route exact path="/Compass/hashtags/:hashtag" component={CompassHashtags}/>
                         <Route exact path="/RePassport" component={RePassport}/>
                         <Route exact path="/profile/:nick" component={Profile}/>
+                        <Route exact path="/SocialLogin/:way" component={SocialLogin}/>
                         <Route component={NoMatch}/>
                     </Switch>
                 </Fragment>

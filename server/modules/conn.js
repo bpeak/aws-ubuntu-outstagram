@@ -2,7 +2,7 @@ const mongo = require('mongodb')
 const url = 'mongodb://localhost:27017'
 const dbName = 'outstagram'
 
-const connPromise = (callback) => {
+const conn = (callback) => {
     mongo.MongoClient.connect(url, (err, client) => {
         if(err){
             callback(err, null, null)
@@ -13,4 +13,4 @@ const connPromise = (callback) => {
     })
 }
 
-module.exports = connPromise
+module.exports = conn

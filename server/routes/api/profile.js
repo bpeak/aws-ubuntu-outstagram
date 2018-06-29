@@ -7,10 +7,9 @@ module.exports = (express, conn, path) => {
         const profilePhotoUrl = req.body.profilePhotoUrl
         //db update
         conn((err, db) => {
-            const field = { id : req.session.user.id }
+            const field = { nick : req.session.passport.user.nick }
             const query = { $set : { profilePhotoUrl }}
             db.collection('users').update(field, query)
-            .then(result => console.log(result))
         })
         //client update
         const response = {

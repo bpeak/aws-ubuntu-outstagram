@@ -46,7 +46,7 @@ module.exports = (express, conn, path) => {
         conn((err, db, mongo) => {
             //err 컨트롤 필요
             //followings 검색
-            const nick = req.session.user.nick
+            const nick = req.session.passport.user.nick
             const query = { nick }
             db.collection('users').find(query)
             .toArray()

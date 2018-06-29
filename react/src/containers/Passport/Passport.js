@@ -34,9 +34,11 @@ class Passport extends Component{
     }
 
     _fetchFinish = () => {
-        this.setState({
-            ...this.state,
-            isFetching : false
+        return new Promise((resolve, reject) => {
+            this.setState({
+                ...this.state,
+                isFetching : false
+            }, () => resolve() )
         })
     }
 
@@ -44,30 +46,35 @@ class Passport extends Component{
         //fetching start
         this._fetchStart();
         const user = {
-            user_input_id,
-            user_input_pw
+            id : user_input_id,
+            pw : user_input_pw
         }
         //fetching...
-        fetch("auth/login", {
+        fetch("/auth/login/local", {
             method: 'POST',
-            credentials: "same-origin",
             headers: {
               'Content-Type': 'application/json'
             },
+            credentials: "same-origin",
             body: JSON.stringify(user)
         })
         .then(data => data.json())
         .then(json => JSON.parse(json))
         .then(response => {
             if(response.isSuccess === true){
-                this._fetchFinish();
-                store.dispatch(actions.login_success(response.user.id, response.user.nick, response.user.name, response.user.profilePhotoUrl))
-            } else {
-                this._fetchFinish();
-                this.setState({
-                    ...this.state,
-                    errorMsgLogin : response.errorMsg
+                this._fetchFinish()
+                .then(() => {
+                    store.dispatch(actions.login_success(response.user.id, response.user.nick, response.user.name, response.user.profilePhotoUrl))
                 })
+            } else {
+                this._fetchFinish()
+                .then(() => {
+                    this.setState({
+                        ...this.state,
+                        errorMsgLogin : response.errorMsg
+                    })
+                })
+
             }
         })
     }
@@ -82,7 +89,7 @@ class Passport extends Component{
             user_input_pw
         }
         //fetching...
-        fetch("auth/join", {
+        fetch("/auth/join", {
             method: 'POST',
             credentials: "same-origin",
             headers: {
@@ -93,6 +100,7 @@ class Passport extends Component{
         .then(data => data.json())
         .then(json => JSON.parse(json))
         .then(response => {
+            console.log(response)
             if(response.isSuccess === true){
                 this._fetchFinish();
                 store.dispatch(actions.login_success(response.user.id, response.user.nick, response.user.name))
@@ -104,13 +112,9 @@ class Passport extends Component{
     }
 
     _fetchJoinCheckId = (user_input_id, callback) => {
-        fetch("auth/join/id", {
-            method: 'POST',
-            credentials: "same-origin",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body : JSON.stringify({user_input_id})
+        fetch(`/auth/check/id/${user_input_id}`, {
+            method: 'GET',
+            credentials: "same-origin"
         })
         .then(data => data.json())
         .then(json => JSON.parse(json))
@@ -119,17 +123,14 @@ class Passport extends Component{
         })
     }
     _fetchJoinCheckNick = (user_input_nick, callback) => {
-        fetch("auth/join/nick", {
-            method: 'POST',
+        fetch(`/auth/check/nick/${user_input_nick}`, {
+            method: 'GET',
             credentials: "same-origin",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body : JSON.stringify({user_input_nick})
         })
         .then(data => data.json())
         .then(json => JSON.parse(json))
         .then(response => {
+            console.log(response)
             callback(response)
         })
     }
