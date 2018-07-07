@@ -32,20 +32,19 @@ class SocialLogin extends Component {
     }
 
     componentDidMount(){
-        // fetch('/auth/kakao/info', {
-        //     method : "GET",
-        //     credentials: 'same-origin'
-        // })
-        // .then(data => data.json())
-        // .then(json => JSON.parse(json))
-        // .then(response => {
-        //     console.log(response.user)
-        //     this.setState({
-        //         ...this.state,
-        //         user : response.user
-        //     })
-        // })
-        this._test()
+        fetch('/auth/login/kakao/info', {
+            method : "GET",
+            credentials: 'same-origin'
+        })
+        .then(data => data.json())
+        .then(json => JSON.parse(json))
+        .then(response => {
+            console.log(response.user)
+            this.setState({
+                ...this.state,
+                user : response.user
+            })
+        })
     }
 
     _handleOnNickInputChange = (e) => {
@@ -56,26 +55,6 @@ class SocialLogin extends Component {
         // fetch('/auth/')
     }
 
-    _test = () => {
-        const request = {
-            user : {
-                id : 'test id',
-                nick : 'test nick',
-                name : 'test name',
-                pw : 'test pw'
-            }
-        }
-        fetch('/auth/login/local', {
-            method : "POST",
-            headers : {
-                'content-type' : 'application/json'
-            },
-            body : JSON.stringify(request.user)
-        })
-        .then(data => data.json())
-        .then(json => JSON.parse(json))
-        .then(response => console.log(response))
-    }
 
     _handleOnBtnSubmitClick = () => {
         const user = {

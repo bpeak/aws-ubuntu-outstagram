@@ -1,26 +1,26 @@
 module.exports = (express, conn, path) => {
     const posts = express.Router()
 
-    post => posts/write
-    post => posts/get/main
-    post => posts/get/compass
-    post => posts/write/comment
+    // post => posts/write
+    // post => posts/get/main
+    // post => posts/get/compass
+    // post => posts/write/comment
 
     const upload = require(path.join(__rootDir, '/server/middlewares/upload.js'))
 	posts.post('/write', upload.postFile.array('postFiles'), (req, res) => {
-        const { id, nick } = req.session.user
+        const { nick } = req.session.passport.user
         const contents = req.body.contents
         const user_input_textarea = req.body.user_input_textarea
         let hashtags = typeof req.body.hashtags === 'string' ? [req.body.hashtags] : req.body.hashtags
         const isoDate = new Date().toISOString()
         const post = {
-            id,
             nick,
             contents,
             description : user_input_textarea,
             hashtags : [...hashtags],
             comments : [],
             likes : [],
+            flags : [],
             date : isoDate
         }
         conn((err, db) => {
@@ -46,7 +46,7 @@ module.exports = (express, conn, path) => {
         conn((err, db, mongo) => {
             //err 컨트롤 필요
             //followings 검색
-            const nick = req.session.passport.user.nick
+            const { nick } = req.session.passport.user
             const query = { nick }
             db.collection('users').find(query)
             .toArray()
@@ -102,16 +102,34 @@ module.exports = (express, conn, path) => {
     })
 
     posts.post('/save', (req, res) => {
+        console.log('저장을 왜 안해?')
         conn((err, db, mongo) => {
             if(err){
                 console.log(err)
             } else {
                 const postId = req.body.postId
-                const nick = req.session.user.nick
+                const postObjectId = mongo.ObjectId(postId)
+                const nick = req.session.passport.user.nick
                 
-                const field = { nick }
-                const query = { $addToSet: { flags : postId }}
-                db.collection('users').update(field, query)
+                const field = { _id : postObjectId }
+                const query = { $addToSet: { flags : nick }}
+                db.collection('posts').update(field, query)
+            }
+        })
+    })
+
+    posts.post('/delete', (req, res) => {
+        conn((err, db, mongo) => {
+            if(err){
+                console.log(err)
+            } else {
+                const postId = req.body.postId
+                const postObjectId = mongo.ObjectId(postId)
+                const nick = req.session.passport.user.nick
+                
+                const field = { _id : postObjectId }
+                const query = { $pull: { flags : nick }}
+                db.collection('posts').update(field, query)
             }
         })
     })

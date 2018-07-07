@@ -8,6 +8,27 @@ import ProfileMyContents from '~components/Profile/ProfileMyContents.js'
 import './ProfileMy.scss'
 
 class ProfileMy extends Component {
+    constructor(){
+        super()
+        this.state = {
+            savedPosts : []
+        }
+    }
+    componentDidMount(){
+        fetch('/api/users/post/flaged', {
+            method : "GET",
+            credentials: "same-origin"
+        })
+        .then(data => data.json())
+        .then(json => JSON.parse(json))
+        .then(response => {
+            console.log(response)
+            this.setState({
+                ...this.state,
+                savedPosts : response.posts
+            })
+        })
+    }
     render() {
         const { 
             nick,
@@ -15,7 +36,8 @@ class ProfileMy extends Component {
             profilePhotoUrl,
             followers,
             followings,
-            posts
+            posts,
+            savedPosts
         } = this.props.user
         return (
             <div className="profileMy">
@@ -32,6 +54,7 @@ class ProfileMy extends Component {
                 <section>
                     <ProfileMyContents
                         posts={posts}
+                        savedPosts={this.state.savedPosts}
                     />
                 </section>
             </div>

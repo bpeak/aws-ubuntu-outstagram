@@ -8,7 +8,7 @@ module.exports = (express, conn) => {
             } else {
                 const postObjectId = mongo.ObjectId(req.body.postId)
                 const content = req.body.user_input_comment
-                const nick = req.session.user.nick
+                const nick = req.session.passport.user.nick
                 const isoDate = new Date().toISOString()
                 
                 const comment = {

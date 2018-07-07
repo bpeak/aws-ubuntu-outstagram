@@ -10,6 +10,8 @@ import write3Img from '~img/post/write3.png'
 
 import hashtagController from '~modules/hashtagController.js'
 
+import store from '~redux/reducers/store.js'
+
 class PostWriteForm extends Component{
 	_maxLength = 150
 	constructor(){
@@ -20,7 +22,8 @@ class PostWriteForm extends Component{
 				currentLength : 0
 			},
             hashtags : ['outstagram'],
-            files : []
+            files : [],
+            isFetched : false
 		}
 	}
 
@@ -49,6 +52,10 @@ class PostWriteForm extends Component{
     }
 
     _handleOnSubmitClick = () => {
+        this.setState({
+            ...this.state,
+            isFetched : true
+        })
         const form = new FormData()
         //files
         for(let i = 0; i < this.state.files.length; i++){
@@ -69,7 +76,9 @@ class PostWriteForm extends Component{
         .then(json => JSON.parse(json))
         .then(response => {
             if(response.isSuccess === true){
-                
+                const nick = store.getState().user.nick
+                const url = `/profile/${nick}`
+                window.location=url 
             }
         })
     }
@@ -94,7 +103,9 @@ class PostWriteForm extends Component{
                 </div>
 				<textarea placeholder="간단한 코멘트과 태그로 포스트를 공유하세요.&#13;&#10;eg ) #outstagram 과함께." onChange={this._handleOnTextareaChange} maxLength={this._maxLength}></textarea>
                 <div className="btns">
-                    <button onClick={this._handleOnSubmitClick} className="submit">공유하기</button>
+                    <button 
+                        onClick={this._handleOnSubmitClick} 
+                        className={this.state.isFetched === true ? "submit sumbit-loading" : "submit"}>공유하기</button>
                     <button className="cancel">취소</button>
                 </div>
             </div>

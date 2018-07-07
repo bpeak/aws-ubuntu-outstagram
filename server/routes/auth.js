@@ -23,8 +23,8 @@ module.exports = (express, conn, path) => {
                             name : user_input_name,
                             salt : pwSet.salt,
                             key : pwSet.key,
-                            followings : ['bpeak', 'kihyun'],
-                            followers : []
+                            followings : ['wlgud'],
+                            followers : ['rlgus', 'kihyun']
                         }
                         conn((err, db) => {
                             db.collection('users').insert(user)

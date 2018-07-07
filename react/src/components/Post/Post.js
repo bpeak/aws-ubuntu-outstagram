@@ -16,6 +16,8 @@ import PostDescription from './PostDescription/PostDescription.js'
 //import PostComments from './PostComments/PostComments.js'
 import PostCommentInput from './PostCommentInput/PostCommentInput.js'
 
+import { Link } from 'react-router-dom'
+
 //store
 import store from '~redux/reducers/store.js'
 //scss
@@ -24,6 +26,8 @@ import './Post.scss'
 class Post extends Component {
     constructor(props){
         super(props)
+        console.log(props.likes)
+        console.log(props.flags)
         this.state = {
             contents : {
                 count : props.contents.length,
@@ -39,7 +43,7 @@ class Post extends Component {
                 isFetching : false
             },
             flag : {
-                isSaved : false
+                isFlaged : props.flags.indexOf(store.getState().user.nick) === -1 ? false : true
             }
         }
     }
@@ -118,8 +122,8 @@ class Post extends Component {
             }
         })
 
-        const { _id } = this.props
-        fetch(`/api/likes/like/${_id}`, {
+        const { _id, nick } = this.props
+        fetch(`/api/likes/like/${_id}/${nick}`, {
             method,
             credentials: "same-origin"
         })
@@ -197,13 +201,19 @@ class Post extends Component {
             ...this.state,
             flag : {
                 ...this.state.flag,
-                isSaved : !this.state.flag.isSaved
+                isFlaged : !this.state.flag.isFlaged
             }
         }, () => {
+            let url
+            if(this.state.flag.isFlaged === true){
+                url = '/api/posts/save'
+            } else {
+                url = '/api/posts/delete'
+            }
             const request = {
                 postId : this.props._id
             }
-            fetch('/api/posts/save', {
+            fetch(url, {
                 method : "POST",
                 headers : {
                     "content-type" : "application/json"
@@ -224,8 +234,10 @@ class Post extends Component {
         return(
             <article className="post-article">
                 <header className="post-article-header">
-                    <PostProfilePhoto url={profilePhotoUrl}/>
-                    <PostNick nick={nick}/>
+                    <Link to={`/profile/${nick}`}>
+                        <PostProfilePhoto url={profilePhotoUrl}/>
+                        <PostNick nick={nick}/>
+                    </Link>
                 </header>
                 <section 
                     className="post-article-contents"
@@ -268,7 +280,7 @@ class Post extends Component {
                         <div>
                             <PostFlag
                                 handleOnClick={this._handleOnFlagClick}
-                                isSaved={this.state.flag.isSaved}
+                                isFlaged={this.state.flag.isFlaged}
                             />
                         </div>
                     </div>

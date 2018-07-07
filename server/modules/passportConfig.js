@@ -55,21 +55,12 @@ module.exports = () => {
                 })
             }
         })
-        // const user = { df : 1}
-        // const 로그인성공 = true
-        // if(로그인성공){
-        //     return done(null, user)
-        // } else {
-        //     return done(null, false, { errorMsg: '비밀번호가 틀렸습니다' })
-        // }
-        
-        
     }))
 
     passport.use('kakao-login', new KakaoStrategy({
         clientID: '5396e78d8ee5a2b0216be81bdd5e200a',
         clientSecret: 'fKh2HduI3eVkmoYF5ORLAgUyrtsCTZmt',
-        callbackURL: 'http://localhost:80/auth/kakao/callback'
+        callbackURL: 'http://localhost:80/auth/login/kakao/callback'
     }, (accessToken, refreshToken, profile, done) => {
         const user = {
             unqueId : profile.id,
@@ -82,12 +73,12 @@ module.exports = () => {
     passport.use('facebook-login', new FacebookStrategy({
         clientID: '1727973423984604',
         clientSecret: 'e9e488bcb5624392c89a4e41ca59e89e',
-        callbackURL: '/auth/facebook/callback',
+        callbackURL: '/auth/login/facebook/callback',
         passReqToCallback: true
     }, (req, accessToken, refreshToken, profile, done) => {
-        console.log('profile 찍어봄')
-        console.log(profile)
-        console.log('이거 찌것음')
+        // console.log('profile 찍어봄')
+        // console.log(profile)
+        // console.log('이거 찌것음')
         return done(null, profile)
     }))
 }

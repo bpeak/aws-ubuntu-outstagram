@@ -45,6 +45,7 @@ class PostModal extends Component {
                             contents={post.contents}
                             description={post.description}
                             likes={post.likes}
+                            flags={post.flags}
                             comments={post.comments}
                         />
                     </div>

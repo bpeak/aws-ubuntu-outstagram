@@ -4,7 +4,7 @@ import './IconHeart.scss'
 
 import ImgHeart from '~img/heart.svg'
 
-import FollowNewsModal from './FollowNewsModal/FollowNewsModal.js'
+import NewsModal from './NewsModal/NewsModal.js'
 
 class IconHeart extends Component{
     constructor(){
@@ -26,7 +26,7 @@ class IconHeart extends Component{
         return (
             <div id="iconHeart-container">
                 <a onClick={this._invertModalState}><img className="header__icon_right" src={ImgHeart}/></a>
-                {this.state.isModalOpend === true && <FollowNewsModal invertModalState={this._invertModalState}/>}
+                {this.state.isModalOpend === true && <NewsModal invertModalState={this._invertModalState}/>}
             </div>
         )
     }

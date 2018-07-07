@@ -25,11 +25,15 @@ $border-color : #d3d3d3;
 }
 
 .post-article-header{
-    .postPhoto{
-        margin-left: 10px;
-    }
-    .postNick{
-        margin-left: 10px;
+    a{
+        display: flex;
+        align-items: center;
+        .postPhoto{
+            margin-left: 10px;
+        }
+        .postNick{
+            margin-left: 10px;
+        }
     }
 }
 

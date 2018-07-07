@@ -4,6 +4,8 @@ import ProfilePhoto from '../Profile/ProfilePhoto/ProfilePhoto.js'
 import ProfileNick from '../Profile/ProfileNick/ProfileNick.js'
 import ProfileName from '../Profile/ProfileName/ProfileName.js'
 
+import { Link } from 'react-router-dom'
+
 import './ProfileAside.scss'
 
 import store from '~redux/reducers/store.js'
@@ -26,7 +28,7 @@ class ProfileAside extends Component{
     render(){
         return (
             <div className="profileAside">
-                <div id="profileAside-userSet">
+                <Link to={`/profile/${store.getState().user.nick}`} id="profileAside-userSet">
                     <span id="profilePhoto-container">
                         <ProfilePhoto url={this.state.profilePhotoUrl}/>
                     </span>
@@ -34,7 +36,7 @@ class ProfileAside extends Component{
                     <ProfileNick/>
                     <ProfileName/>
                     </div>
-                </div>
+                </Link>
                 <div id="profileAside_story">
                     스토리
                 </div>

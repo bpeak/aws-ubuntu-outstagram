@@ -62,7 +62,7 @@ class SearchBarModal extends Component {
 const SearchBarModalHashtag = ({hashtag, hashtagPostsCount, handleOnModalCloseClick}) => {
     return (
         <Link onClick={handleOnModalCloseClick} to={`/Compass/hashtags/${hashtag}`} className="__content">
-            <img src={sampleImg}/>
+            <img className="__hashtagImg" src={sampleImg}/>
             <div className="__textSet">
                 <span>#{hashtag}</span>
                 <span>게시물 {hashtagPostsCount}</span>
@@ -73,7 +73,9 @@ const SearchBarModalHashtag = ({hashtag, hashtagPostsCount, handleOnModalCloseCl
 const SearchBarModalUser = ({profilePhotoUrl, nick, name, handleOnModalCloseClick}) => {
     return (
         <Link onClick={handleOnModalCloseClick} to={`/profile/${nick}`} className="__content">
-            <ProfilePhoto url={profilePhotoUrl}/>
+            <div className="__profilePhoto-container">
+                <ProfilePhoto url={profilePhotoUrl}/>
+            </div>
             <div className="__textSet">
                 <span>{nick}</span>
                 <span>{name}</span>

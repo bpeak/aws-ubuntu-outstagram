@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-import './FollowNewsModal.scss'
+import './NewsModal.scss'
 
 import LoadingSpinner from '~components/LoadingSpinner/LoadingSpinner.js'
 
-class FollowNewsModal extends Component{
+class NewsModal extends Component{
     constructor(){
         super()
         this.state = {
@@ -20,14 +20,24 @@ class FollowNewsModal extends Component{
 		}
     }
     
-    _fetchRecentlyFollows = () => {
-        console.log('d')
-        setTimeout(() => {
-            this.setState({
-                ...this.state,
-                isFetched : true
-            })
-        }, 1500)
+    _fetchNews = () => {
+        fetch('/api/news', {
+            method : "GET",
+            credentials: 'same-origin'
+        })
+        .then(data => data.json())
+        .then(json => JSON.parse(json))
+        .then(respones => {
+            console.log(response)
+            this._fetchFinish()
+        })
+    }
+
+    _fetchFinish = () => {
+        this.setState({
+            ...this.state,
+            isFetched : true
+        })
     }
 
     componentWillMount(){
@@ -39,16 +49,16 @@ class FollowNewsModal extends Component{
     
     componentDidMount(){
         console.log(1)
-        this._fetchRecentlyFollows()
+        this._fetchNews()
     }
 
     render(){
         return(
-            <div id="modal" className={this.state.isFetched === true ? "followNewsModal-container followNewsModal-active" : "followNewsModal-container followNewsModal-InActive" }>
+            <div id="modal" className={this.state.isFetched === true ? "newsModal-container newsModal-active" : "newsModal-container newsModal-InActive" }>
                 {this.state.isFetched === false && <LoadingSpinner/>}
             </div>
         )
     }
 }
 
-export default FollowNewsModal
+export default NewsModal

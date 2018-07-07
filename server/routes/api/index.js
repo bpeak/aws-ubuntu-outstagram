@@ -23,5 +23,8 @@ module.exports = (express, conn, path) => {
     const comment = require('./comment.js')(express, conn)
     api.use('/comment', comment)
 
+    const news = require('./news.js')(express, conn)
+    api.use('/news', news)
+
 	return api
 }

@@ -147,6 +147,7 @@ class Posts extends Component{
                                     contents={post.contents}
                                     description={post.description}
                                     likes={post.likes}
+                                    flags={post.flags}
                                     comments={post.comments}
                                 />
                                 {this.state.posts.length === 0 || index === 0 && <div className="followingRecommend-container"><FollowingRecommend/></div>}

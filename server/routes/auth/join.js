@@ -30,8 +30,10 @@ module.exports = (express, conn) => {
                                 name : user_input_name,
                                 salt : pwSet.salt,
                                 key : pwSet.key,
-                                followings : ['bpeak', 'kihyun'],
-                                followers : []
+                                followings : ['kihyun', 'bpeak'],
+                                followers : [],  ///여기 고치면되 이제 팔로우테스트 하면덴다
+                                flaged : [],
+                                recentNews : []
                             }
                             db.collection('users').insert(user)
                             .then(() => {

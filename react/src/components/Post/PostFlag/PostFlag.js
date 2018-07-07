@@ -7,12 +7,12 @@ import savedFlagImg from '~img/post/savedFlag.png'
 //scss
 import './PostFlag.scss'
 
-const PostFlag = ({handleOnClick, isSaved}) => {
+const PostFlag = ({handleOnClick, isFlaged}) => {
     return (
         <img 
             onClick={handleOnClick} 
             className="postFlag" 
-            src={isSaved === true ? savedFlagImg : flagImg}/>
+            src={isFlaged === true ? savedFlagImg : flagImg}/>
     )
 }
 
