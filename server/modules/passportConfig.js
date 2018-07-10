@@ -62,12 +62,33 @@ module.exports = () => {
         clientSecret: 'fKh2HduI3eVkmoYF5ORLAgUyrtsCTZmt',
         callbackURL: 'http://localhost:80/auth/login/kakao/callback'
     }, (accessToken, refreshToken, profile, done) => {
-        const user = {
-            unqueId : profile.id,
-            name : profile.username,
-            profilePhotoUrl : profile._json.properties.profile_image
-        }
-        return done(null, user)
+        conn((err, db, mongo) => {
+            const field = { $and : [{ id : profile.id }, { memberType : 'kakao' }]}
+            db.collection('users')
+            .find(field)
+            .toArray()
+            .then(results => {
+                if(results.length === 1){
+                    //가입멤버
+                    const user = {
+                        id : profile.id,
+                        nick : results[0].nick,
+                        name : results[0].name,
+                        profilePhotoUrl : results[0].profilePhotoUrl
+                    }
+                    done(null, user)
+                } else {
+                    //미가입멤버
+                    done(null, false, { profile })
+                }
+            })
+        }) 
+        // const user = {
+        //     unqueId : profile.id,
+        //     name : profile.username,
+        //     profilePhotoUrl : profile._json.properties.profile_image
+        // }
+        // return done(null, user)
     }))
 
     passport.use('facebook-login', new FacebookStrategy({
@@ -79,6 +100,7 @@ module.exports = () => {
         // console.log('profile 찍어봄')
         // console.log(profile)
         // console.log('이거 찌것음')
+        console.log(profile)
         return done(null, profile)
     }))
 }

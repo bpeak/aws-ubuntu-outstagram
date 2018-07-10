@@ -173,7 +173,7 @@ class JoinForm extends Component{
                 <img className="loginForm-logoImg" src={logoImg}/>
                 <form>
                     <div>
-                        <input className="joinForm-input" id="user_input_id" onChange={this._handleOnInputChange} onBlur={this._handleOnInputBlur} onFocus={this._handleOnInputFocus} placeholder="휴대폰 번호 또는 이메일주소" type="text"/>
+                        <input className="joinForm-input" id="user_input_id" onChange={this._handleOnInputChange} onBlur={this._handleOnInputBlur} onFocus={this._handleOnInputFocus} placeholder="아이디" type="text"/>
                         {this.state.user_input_id.isChecked === true && 
                             <img className="joinForm-mark" src={this.state.user_input_id.isAvailable === true ? markYesImg : markNoImg }/>
                         }

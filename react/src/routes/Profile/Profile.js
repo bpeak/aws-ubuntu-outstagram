@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 
 //components
 import ProfileMy from './ProfileMy/ProfileMY.js'
-import ProfileOther from '~components/Profile/ProfileOther.js'
+import ProfileOther from './ProfileOther/ProfileOther.js'
 import LoadingSpinner from '~components/LoadingSpinner/LoadingSpinner.js'
 
 //store

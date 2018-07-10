@@ -15,8 +15,8 @@ const getTextExceptSharp = (hashtags) => {
 }
 
 const discriminator = (text) => {
-    const pattern = /#[^#\s,;]+/gm
-    const result = /#[^#\s,;]+/gm.exec(text)
+    const pattern = /^#[^#\s,;]+/gm
+    const result = pattern.exec(text)
     if(result === null){
         return false
     } else {

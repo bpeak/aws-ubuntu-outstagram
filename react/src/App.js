@@ -13,7 +13,7 @@ import SocialLogin from '~routes/SocialLogin/SocialLogin.js'
 import ProfileEdit from '~routes/ProfileEdit/ProfileEdit.js'
 import DevInfo from '~routes/DevInfo/DevInfo.js'
 import NoMatch from '~routes/NoMatch.js'
-
+import Dothis from '~routes/Dothis.js'
 
 class App extends Component{
 
@@ -31,6 +31,7 @@ class App extends Component{
                         <Route exact path="/SocialLogin/:way" component={SocialLogin}/>
                         <Route exact path="/ProfileEdit" component={ProfileEdit}/>
                         <Route exact path="/DevInfo" component={DevInfo}/>
+                        <Route exact path="/Dothis" component={Dothis}/>
                         <Route component={NoMatch}/>
                     </Switch>
                 </Fragment>

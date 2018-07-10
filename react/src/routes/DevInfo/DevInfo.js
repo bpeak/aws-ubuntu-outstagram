@@ -13,27 +13,30 @@ class DevInfo extends Component {
                 <PassportHeader/>
                 <main>
                     <section>
-                        <h1>dev info</h1>
+                        <h1>developer</h1>
                         <ul>
-                            <li>developer : 김기현</li>
-                            <li>email : bpeakCbpeak@gmail.com</li>
+                            <li>name : 김기현</li>
+                            <li>email : bpeakCpeak@gmail.com</li>
                         </ul>
-                        <h2>기술 스택</h2>
+                        <h2>technical stack</h2>
                         <ul>
-                            <li>프론트엔드
+                            <li>frontend
                                 <ul>
+                                    <li>html5</li>
+                                    <li>javascript</li>
+                                    <li>scss</li>
                                     <li>React</li>
                                     <li>Redux</li>
-                                    <li>html5</li>
-                                    <li>scss</li>
                                     <li>webpack</li>
                                 </ul>
                             </li>
-                            <li>백엔드
+                            <li>backend
                                 <ul>
                                     <li>node.js</li>
                                     <li>express</li>
-                                    <li>server : 자체서버</li>
+                                    <li>aws</li>
+                                    <li>ec2</li>
+                                    <li>linux(ubuntu)</li>
                                 </ul>                   
                             </li>
                         </ul>

@@ -28,6 +28,7 @@ module.exports = (express, conn) => {
     })
 
     check.get('/nick/:nick', (req, res) => {
+        console.log(req.params.nick, '검사')
         conn((err, db, mongo) => {
             if(err){
                 console.log(err)

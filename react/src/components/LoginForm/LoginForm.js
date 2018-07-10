@@ -83,7 +83,7 @@ class LoginForm extends Component{
                     ?
                         <Fragment>
                             <form onSubmit={this._handleOnLoginSubmit}>
-                                <input className="loginForm-input" onChange={this._handleOnIdChange} value={this.state.user_input_id} placeholder="휴대폰 번호 또는 이메일주소"/>
+                                <input className="loginForm-input" onChange={this._handleOnIdChange} value={this.state.user_input_id} placeholder="아이디"/>
                                 <input className="loginForm-input" onChange={this._handleOnPwChange} value={this.state.user_input_pw} placeholder="비밀번호" type="password"/>
                                 <input disabled={isFetching === true || this.state.user_input_id === '' || this.state.user_input_pw === '' ? true : false } className="loginForm-btnSubmit" type="submit" value="로그인"/>
                             </form>
@@ -97,11 +97,11 @@ class LoginForm extends Component{
                         <Fragment>
                             <div id="loginForm-profilePhoto-container">
                                 <ProfilePhoto url={this.state.loginHistory.profilePhotoUrl}/>
-                                <input onChange={this._handleOnHistoryLoginInputChange} className="loginForm-input" type="password" placeholder="비밀번호"/>
-                                <input onClick={this._handleOnHistoryLoginClick} disabled={isFetching === true || this.state.historyLogin_input_pw === '' ? true : false } className="loginForm-btnSubmit" type="submit" value={this.state.loginHistory._id + "님으로 계속"}/>
+                                    <input onChange={this._handleOnHistoryLoginInputChange} className="loginForm-input" type="password" placeholder="비밀번호"/>
+                                    <input onClick={this._handleOnHistoryLoginClick} disabled={isFetching === true || this.state.historyLogin_input_pw === '' ? true : false } className="loginForm-btnSubmit" type="submit" value={this.state.loginHistory.name + "님으로 계속"}/>
                                 {errorMsg !== '' && <span id="loginForm-errorMsg">{errorMsg}</span>}
                                 <div id="historyForm-span-container">
-                                    <span>wlgudrlgus님이 아닌가요?</span>
+                                    <span>{this.state.loginHistory.name} 님이 아닌가요?</span>
                                     <span className="loginForm-span2" onClick={this._handleOnBtnChangeAccountClick}>계정 변경</span>
                                 </div>
                             </div>

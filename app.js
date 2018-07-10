@@ -38,21 +38,34 @@ app.use(session({
 app.use(passport.initialize())// passport 구동
 app.use(passport.session())// 세션 연결
 passportConfig()
-app.use('*', (req, res, next) => {
-    const user = {
-        nick : 'bpeak',
-        id : 'bpeak'
-    }
-    req.session.passport = {
-        user
-    }
-    next()
-})
+
+// app.use('*', (req, res, next) => {
+//     const user = {
+//         id : 'bpeak',
+//         name : 'bpeak'
+//     }
+//     req.session.passport = {
+//         user
+//     }
+//     next()
+// })
 
 app.use('/auth', auth3)
 app.use('/api', api)
 app.use('/public', express.static('./react/public'))
 app.use('/uploads', express.static('./server/uploads'))
+
+app.get('*', (req, res, next) => {
+    const user = {
+        id : 'xotjq',
+        nick : 'xotjq',
+        name : 'xotjq'
+    }
+    req.session.passport = {
+        user : user
+    }
+    next()
+})
 
 app.get('*', (req, res) => {
     if(req.headers['user-agent'].indexOf('Chrome') === -1){

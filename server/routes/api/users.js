@@ -183,9 +183,9 @@ module.exports = (express, conn) => {
             const newNews = {
                 nick : req.session.passport.user.nick,
                 type : 'follow',
-                ISODate : new Date().toISOString()
+                date : new Date().toISOString()
             }
-            const query1 = { $push : { followers : myNick }}
+            const query1 = { $addToSet : { followers : myNick }}
             db.collection('users')
             .update(field, query1)
             const query2 = { $push : { recentNews : newNews }}
@@ -195,6 +195,7 @@ module.exports = (express, conn) => {
     })
 
     users.post('/remove/follow', (req, res) => {
+        console.log('여기 들어와지냐?')
         const myNick = req.session.passport.user.nick
         const unFollowNick = req.body.unFollowNick
         
@@ -215,14 +216,19 @@ module.exports = (express, conn) => {
         })
 
         //상대
-        // conn((err, db, mongo) => {
-        //     const field = { nick : unFollowNick }
-        //     const query1 = { $pull : { followers : myNick }}
-        //     db.collection('users')
-        //     .update(field, query1)
+        conn((err, db, mongo) => {
+            const field = { nick : unFollowNick }
+            const query1 = { $pull : { followers : myNick }}
+            db.collection('users')
+            .update(field, query1)
 
-        //     //리센트 팔로우소식 삭제
-        // })
+            const query2 = { $pull : { recentNews : { $and : [
+                { nick : myNick },
+                { type : 'follow' }
+            ]}}}
+            db.collection('users')
+            .update(field, query2)
+        })
 
     })    
 

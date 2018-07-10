@@ -27,6 +27,26 @@ module.exports = (express, conn) => {
                         res.json(JSON.stringify(response))
                     }
                 })
+
+                //상대
+                const field1 = { _id : postObjectId }
+                db.collection('posts')
+                .find(field1)
+                .toArray()
+                .then(results => {
+                    const hostNick = results[0].nick
+                    const myNick = nick
+                    const newNews = {
+                        nick : myNick,
+                        type : 'comment',
+                        postId : req.body.postId,
+                        date : new Date().toISOString()
+                    }
+                    const field2 = { nick : hostNick }
+                    const query2 = { $push : { recentNews : newNews }}
+                    db.collection('users')
+                    .update(field2, query2)
+                })
             }
         })
     })

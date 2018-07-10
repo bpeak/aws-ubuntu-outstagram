@@ -46,13 +46,12 @@ class ProfileAside extends Component{
                 <div id="profileAside_nav">
                     <nav>
                         <ul>
-                            <li>개발자정보</li>
-                            <li>기술스택 이거가로로바가야뎀 </li>
+                            <li><Link className="__link" to='/devinfo'>개발자정보</Link></li>
                         </ul>
                     </nav>
                 </div>
                 <div>
-                    <span>© 2018 BSTAGRAM</span>
+                    <span>© 2018 OUTSTAGRAM</span>
                 </div>
             </div>
         )
