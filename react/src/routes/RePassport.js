@@ -15,9 +15,15 @@ class RePassport extends Component {
 
     componentDidMount(){
         store.dispatch(actions.logout_success())
-        this.setState({
-            ...this.state,
-            isClearPassportData : true
+        fetch('/auth/logout', {
+            method : "GET",
+            credentials : 'same-origin'
+        })
+        .then(() => {
+            this.setState({
+                ...this.state,
+                isClearPassportData : true
+            })
         })
     }
 

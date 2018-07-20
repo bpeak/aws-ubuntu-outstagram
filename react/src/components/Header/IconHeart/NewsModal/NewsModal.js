@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom'
 
 import LoadingSpinner from '~components/LoadingSpinner/LoadingSpinner.js'
 
+import videoImg from '~img/video.png'
+
 class NewsModal extends Component{
     constructor(){
         super()
@@ -60,7 +62,9 @@ class NewsModal extends Component{
                 {this.state.isFetched === true && this.state.recentNews !== null && 
                     <div className="__main">
                         {this.state.recentNews.length === 0 
-                            ? '최근 소식이 없습니다.'
+                            ? <div className="__msg-container">
+                                <span>최근소식이 없습니다.</span>
+                            </div>
                             : <div>
                                 {this.state.recentNews.map(((news, index) => {
                                     if(news.type === 'follow'){
@@ -81,52 +85,135 @@ class NewsModal extends Component{
 }
 
 const LikeNews = ({news}) => {
+    let imgSrc = null
+    for(let i = 0; i < news.post.contents.length; i++){
+        if(news.post.contents[i].type === 'img'){
+            imgSrc = news.post.contents[i].url
+            break
+        } else {
+            continue
+        }
+    }
+    let timeStamp
+
+    const date = new Date(Date.parse(news.date))
+    const today = new Date()
+    if(date.getMonth() === today.getMonth()){
+        if(today.getDate() === date.getDate()){
+            timeStamp = "오늘"
+        } else {
+            timeStamp = today.getDate() - date.getDate() + "일전"
+        }
+    } else {
+        timeStamp = today.getMonth() - date.getMonth() + "달전"
+    }
+
     return (
         <div className="News LikeNews">
-            <Link className="__userInfo" to="/dd">
-                <div className="__profilePhoto-container">
-                    <ProfilePhoto url={news.profilePhotoUrl}/>
-                </div>
-                <span className="__nick">
-                    {news.nick}
-                </span>
-            </Link>
-            <span className="__msg">님이 회원님의 포스트를 좋아합니다.</span>
-            <span className="__date">2주</span>
+            <div className="__left">
+                <Link className="__userInfo" to={`/profile/${news.nick}`}>
+                    <div className="__profilePhoto-container">
+                        <ProfilePhoto url={news.profilePhotoUrl}/>
+                    </div>
+                    <span className="__nick">
+                        {news.nick}
+                    </span>
+                </Link>
+                <span className="__msg">님이 회원님의 포스트를 좋아합니다.</span>
+                <span className="__date">{timeStamp}</span>            
+            </div>
+            <div className="__right">
+                {imgSrc === null
+                    ? <img className="__content" src={videoImg}/>
+                    : <Link to={`/post/${news.post._id}`}><img className="__content" src={imgSrc}/></Link>
+                }
+            </div>
         </div>
     )
 }
 
 const CommentNews = ({news}) => {
+    let imgSrc = null
+    for(let i = 0; i < news.post.contents.length; i++){
+        if(news.post.contents[i].type === 'img'){
+            imgSrc = news.post.contents[i].url
+            break
+        } else {
+            continue
+        }
+    }
+
+    let timeStamp
+
+    const date = new Date(Date.parse(news.date))
+    const today = new Date()
+    if(date.getMonth() === today.getMonth()){
+        if(today.getDate() === date.getDate()){
+            timeStamp = "오늘"
+        } else {
+            timeStamp = today.getDate() - date.getDate() + "일전"
+        }
+    } else {
+        timeStamp = today.getMonth() - date.getMonth() + "달전"
+    }
+
     return (
         <div className="News LikeNews">
-            <Link className="__userInfo" to="/dd">
-                <div className="__profilePhoto-container">
-                    <ProfilePhoto url={news.profilePhotoUrl}/>
-                </div>
-                <span className="__nick">
-                    {news.nick}
-                </span>
-            </Link>
-            <span className="__msg">님이 댓글을 남겼습니다.</span>
-            <span className="__date">2주</span>
+            <div className="__left">
+                <Link className="__userInfo" to={`/profile/${news.nick}`}>
+                    <div className="__profilePhoto-container">
+                        <ProfilePhoto url={news.profilePhotoUrl}/>
+                    </div>
+                    <span className="__nick">
+                        {news.nick}
+                    </span>
+                </Link>
+                <span className="__msg">님이 댓글을 남겼습니다.</span>
+                <span className="__date">{timeStamp}</span>
+            </div>
+            <div className="__right">
+                {imgSrc === null
+                    ? <img className="__content" src={videoImg}/>
+                    : <Link to={`/post/${news.post._id}`}><img className="__content" src={imgSrc}/></Link>
+                }            
+            </div>
         </div>
     )
 }
 
 const FollowNews = ({news}) => {
+
+    let timeStamp
+
+    const date = new Date(Date.parse(news.date))
+    const today = new Date()
+    if(date.getMonth() === today.getMonth()){
+        if(today.getDate() === date.getDate()){
+            timeStamp = "오늘"
+        } else {
+            timeStamp = today.getDate() - date.getDate() + "일전"
+        }
+    } else {
+        timeStamp = today.getMonth() - date.getMonth() + "달전"
+    }
+
     return (
         <div className="News LikeNews">
-            <Link className="__userInfo" to="/dd">
-                <div className="__profilePhoto-container">
-                    <ProfilePhoto url={news.profilePhotoUrl}/>
-                </div>
-                <span className="__nick">
-                    {news.nick}
-                </span>
-            </Link>
-            <span className="__msg">님이 회원님을 팔로우하기 시작했습니다.</span>
-            <button className="__btn">팔로잉</button>
+            <div className="__left">
+                <Link className="__userInfo" to={`/profile/${news.nick}`}>
+                    <div className="__profilePhoto-container">
+                        <ProfilePhoto url={news.profilePhotoUrl}/>
+                    </div>
+                    <span className="__nick">
+                        {news.nick}
+                    </span>
+                </Link>
+                <span className="__msg">님이 회원님을 팔로우하기 시작했습니다.</span>          
+                <span className="__date">{timeStamp}</span>  
+            </div>
+            <div className="__right">
+                <button className={news.follow === true ? "__btn unFollow" : "__btn follow"}>{news.follow === true ? "언팔로잉" : "팔로잉"}</button>
+            </div>
         </div>
     )
 }

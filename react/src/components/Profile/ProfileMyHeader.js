@@ -10,6 +10,8 @@ import ProfileNameTemp from './ProfileNameTemp/ProfileNameTemp.js'
 //scss
 import './ProfileMyHeader.scss'
 
+import store from '~redux/reducers/store.js'
+
 class ProfileMyHeader extends Component {
     render(){
         const {
@@ -31,7 +33,13 @@ class ProfileMyHeader extends Component {
                     <div className="__top">
                         <div className="__content"><ProfileNickTemp nick={nick}/></div>
                         <div className="__content"><ProfileEditBtn/></div>
-                        <div className="__content"><ProfileSettingIcon/></div>
+                        <div onClick={() => {
+                            if(confirm('로그아웃 하시겠습니까?')){
+                                window.location.href ='/repassport'
+                            } else {
+                                //done
+                            }
+                        }} className="__content"><ProfileSettingIcon/></div>
                     </div>
                     <div className="__mid">
                         <ProfileUserBoradAndFollow
@@ -41,7 +49,7 @@ class ProfileMyHeader extends Component {
                         />
                     </div>
                     <div className="__bottom">
-                        <ProfileNameTemp name={name}/>
+                        <ProfileNameTemp name={store.getState().user.name}/>
                     </div>
                 </div>
             </div>

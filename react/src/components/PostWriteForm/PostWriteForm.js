@@ -52,6 +52,9 @@ class PostWriteForm extends Component{
     }
 
     _handleOnSubmitClick = () => {
+        if(this.state.files.length === 0){
+            return alert('사진이나 영상을 올려주세요.')
+        }
         this.setState({
             ...this.state,
             isFetched : true

@@ -9,3 +9,7 @@ export const logout_success = () => {
 export const profile_add_photo = (url) => {
     return { type : types.PROFILE_ADD_PHOTO, url : url}
 }
+
+export const profile_change_name = (name) => {
+    return { type : types.PROFILE_CHANGE_NAME, name : name }
+}

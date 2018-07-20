@@ -14,6 +14,7 @@ import ProfileEdit from '~routes/ProfileEdit/ProfileEdit.js'
 import DevInfo from '~routes/DevInfo/DevInfo.js'
 import NoMatch from '~routes/NoMatch.js'
 import Dothis from '~routes/Dothis.js'
+import OnePost from '~routes/OnePost/OnePost.js'
 
 class App extends Component{
 
@@ -29,9 +30,10 @@ class App extends Component{
                         <Route exact path="/RePassport" component={RePassport}/>
                         <Route exact path="/profile/:nick" component={Profile}/>
                         <Route exact path="/SocialLogin/:way" component={SocialLogin}/>
-                        <Route exact path="/ProfileEdit" component={ProfileEdit}/>
+                        <Route path="/ProfileEdit" component={ProfileEdit}/>
                         <Route exact path="/DevInfo" component={DevInfo}/>
                         <Route exact path="/Dothis" component={Dothis}/>
+                        <Route exact path="/post/:id" component={OnePost}/>
                         <Route component={NoMatch}/>
                     </Switch>
                 </Fragment>

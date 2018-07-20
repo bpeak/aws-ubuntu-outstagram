@@ -37,6 +37,14 @@ const reducer = (state = defaultState, action) => {
                 profilePhotoUrl : action.url
             }
         }
+    } else if (action.type === types.PROFILE_CHANGE_NAME){
+        return {
+            ...state,
+            user : {
+                ...state.user,
+                name : action.name
+            }
+        }
     } else {
         return state
     }

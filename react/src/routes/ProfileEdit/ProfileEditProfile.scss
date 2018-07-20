@@ -1,0 +1,73 @@
+.ProfileEditProfile{
+    .__row{
+        height: 53px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        .__leftSide{
+            font-size: 17px;
+            font-weight: 600;
+            color: #262626;
+            margin-right: 23px;
+            display: flex;
+            justify-content: flex-end;
+            width: 25%;
+            .__profilePhoto-container{
+                cursor: pointer;
+                width: 38px;
+                height: 38px;
+            }
+            .__file{
+                display: none;
+            }
+        }
+        .__rightSide{
+            select{
+                width: 100px;
+                padding-left: 10px;
+                font-size: 15px;
+                height: 28px;
+                color: #262626;
+            }
+            .__photoSet{
+                display: flex;
+                flex-direction: column;
+                span:nth-child(1){
+                    color: #262626;
+                    font-size: 22px;
+                    font-weight: 600;
+                }
+                span:nth-child(2){
+                    cursor: pointer;
+                    color: cornflowerblue;
+                    font-size: 15px;
+                    font-weight: 500;
+                }
+            }
+            width: 75%;
+            input{
+                padding-left: 10px;
+                font-size: 15px;
+                height: 28px;
+                color: #262626;
+            }
+            .__btnSubmit{
+                cursor: pointer;
+                font-size: 15px;
+                font-weight: 600;
+                text-align: center;
+                width: 60px;
+                height: 28px;
+                color: white;
+                background-color: #3897f0;
+                border: 5px solid #3897f0;
+                border-radius: 5%;
+            }
+            .__btnSubmit:disabled{
+                border: 5px solid #b4cfe9;
+                background-color: #b4cfe9;
+            }
+        }
+    }
+}

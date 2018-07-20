@@ -70,7 +70,8 @@ class LoginForm extends Component{
 
     _handleOnHistoryLoginClick = () => {
         if(this.state.historyLogin_input_pw !== ''){
-            this.props.fetchLogin(this.state.loginHistory._id, this.state.historyLogin_input_pw)
+            console.log(this.state.loginHistory._id, this.state.historyLogin_input_pw)
+            this.props.fetchLogin(this.state.loginHistory.id, this.state.historyLogin_input_pw)
         }
     }
 

@@ -11,13 +11,19 @@ module.exports = (express, conn, path) => {
         const { nick } = req.session.passport.user
         const contents = req.body.contents
         const user_input_textarea = req.body.user_input_textarea
-        let hashtags = typeof req.body.hashtags === 'string' ? [req.body.hashtags] : req.body.hashtags
+        let hashtags
+        if(req.body.hashtags === undefined){
+            hashtags = []
+        } else {
+            let list = typeof req.body.hashtags === 'string' ? [req.body.hashtags] : req.body.hashtags
+            hashtags = [...list]
+        }
         const isoDate = new Date().toISOString()
         const post = {
             nick,
             contents,
             description : user_input_textarea,
-            hashtags : [...hashtags],
+            hashtags,
             comments : [],
             likes : [],
             flags : [],
@@ -35,6 +41,23 @@ module.exports = (express, conn, path) => {
                     res.json(JSON.stringify(response))
                 })
             }
+        })
+    })
+
+    posts.post('/get/one', (req, res) => {
+        conn((err, db, mongo) => {
+            if(err){ return console.log(err)}
+            const { postId } = req.body
+            const field = { _id : mongo.ObjectId(postId)}
+            db.collection('posts')
+            .find(field)
+            .toArray()
+            .then(results => {
+                const response = {
+                    post : results[0]
+                }
+                res.json(JSON.stringify(response))
+            })
         })
     })
     
@@ -131,6 +154,28 @@ module.exports = (express, conn, path) => {
                 const query = { $pull: { flags : nick }}
                 db.collection('posts').update(field, query)
             }
+        })
+    })
+
+    posts.post('/all', (req, res) => {
+        const postIds = req.body.postIds
+        conn((err, db, mongo) => {
+            if(err){ return console.log(err) }
+            const postsCurrentObjectIdList = postIds.map((id) => {
+                return mongo.ObjectId(id)
+            })
+            const field = { _id : { $nin: postsCurrentObjectIdList } }
+            db.collection('posts')
+            .find(field)
+            .limit(3)
+            .sort({ likes : 1 })
+            .toArray()
+            .then(results => {
+                const response = {
+                    posts : results
+                }
+                res.json(JSON.stringify(response))
+            })   
         })
     })
 

@@ -32,6 +32,7 @@ class CompassPost extends Component{
     }
 
     _handleOnModalOpenClick = (e) => {
+        console.log('클리크')
         //이부분 개선필요함 현재 억지로 끼워놨는데
         //왜 여기서의 클릭이 리액트포탈로 전달되어서
         //리액트포탈모달에서의 클릭이 발생했을때 여기서의 클릭이벤트가 발생되는건지 모르겠다.

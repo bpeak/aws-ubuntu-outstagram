@@ -15,6 +15,19 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const passport = require('passport')
 const passportConfig = require('./server/modules/passportConfig')
+
+conn((err, db, mongo) => {
+    db.collection('posts')
+    .find()
+    .limit(5)
+    .sort({ likes : 1 })
+    .toArray()
+    .then(results => {
+        console.log(results)
+    })
+})
+
+
 //routes
 //const auth = require('./server/routes/auth.js')(express, conn, path)
 const api = require('./server/routes/api')(express, conn, path)
@@ -55,19 +68,20 @@ app.use('/api', api)
 app.use('/public', express.static('./react/public'))
 app.use('/uploads', express.static('./server/uploads'))
 
-app.get('*', (req, res, next) => {
-    const user = {
-        id : 'xotjq',
-        nick : 'xotjq',
-        name : 'xotjq'
-    }
-    req.session.passport = {
-        user : user
-    }
-    next()
-})
+// app.get('*', (req, res, next) => {
+//     const user = {
+//         id : 'xotjq',
+//         nick : 'xotjq',
+//         name : 'xotjq'
+//     }
+//     req.session.passport = {
+//         user : user
+//     }
+//     next()
+// })
 
 app.get('*', (req, res) => {
+    console.log(req.session.passport)
     if(req.headers['user-agent'].indexOf('Chrome') === -1){
         res.sendFile(path.join(__dirname, '/react/public/recommendChrome.html'))
     } else {

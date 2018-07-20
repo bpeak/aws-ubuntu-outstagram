@@ -1,0 +1,65 @@
+.ProfileEditPw{
+    width: 100%;
+    .__row{
+        height: 50px;
+        display: flex;
+        .__leftSide{
+            font-size: 15px;
+            font-weight: 600;
+            color: #262626;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 25%;
+            span{
+                margin-right: 20px;
+            }
+            .__profilePhoto-container{
+                width: 40px;
+                height: 40px;
+                margin-right: 20px;
+            }
+        }
+        .__rightSide{
+            display: flex;
+            align-items: center;
+            width: 75%;
+            input{
+                padding-left: 10px;
+                font-size: 15px;
+                height: 28px;
+                color: #262626;
+            }
+            .__nick{
+                font-size: 20px;
+                font-weight: 600;
+                color: #262626;
+            }
+            button{
+                cursor: pointer;
+                font-size: 15px;
+                font-weight: 600;
+                text-align: center;
+                width: 130px;
+                height: 33px;
+                color: white;
+                background-color: #3897f0;
+                border: 5px solid #3897f0;
+                border-radius: 5%;
+            }
+            button:disabled{
+                border: 5px solid #b4cfe9;
+                background-color: #b4cfe9;
+                color: white;
+            }
+            .__loadingSpinner-container{
+                position: relative;
+                div{
+                    position: absolute;
+                    top: -36px;
+                    left: -37px;
+                }
+            }
+        }
+    }
+}

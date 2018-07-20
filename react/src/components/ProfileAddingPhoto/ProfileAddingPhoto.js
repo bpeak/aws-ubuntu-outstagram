@@ -5,6 +5,8 @@ import IconProfileAdding from '../../img/post/profileAdding.png'
 import * as actions from '~redux/actions/index.js'
 import store from '~redux/reducers/store.js'
 
+import getFileType from '~modules/getFileType.js'
+
 import './ProfileAddingPhoto.scss'
 
 class ProfileAddingPhoto extends Component {
@@ -20,6 +22,11 @@ class ProfileAddingPhoto extends Component {
     }
 
     _handleOnInputChange = (e) => {
+        if(getFileType(e.target.files[0].name) === 'img'){
+            //done
+        } else {
+            return alert('파일 형식이 맞지 않습니다.')
+        }
         if(e.target.files.length === 1){
             const form = new FormData()
             form.append('profilePhoto', e.target.files[0])

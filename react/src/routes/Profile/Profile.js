@@ -14,6 +14,8 @@ import Header from '~components/Header/Header.js'
 //scss
 import './Profile.scss'
 
+import Footer from '~components/Footer/Footer.js'
+
 class Profile extends Component {
     constructor(props){
         super(props)
@@ -21,8 +23,15 @@ class Profile extends Component {
             user : null
         }
     }
+
+    componentWillReceiveProps(){
+        this.componentDidMount()
+    }
+
     componentDidMount(){
+        console.log('디마')
         const nick = this.props.match.params.nick
+        console.log(nick)
         fetch(`/api/users/${nick}`, {
             method : "GET",
             credentials: "same-origin"
@@ -53,6 +62,7 @@ class Profile extends Component {
                         : <LoadingSpinner/>
                     }
                 </main>
+                <Footer/>
             </div>
         )
     }
