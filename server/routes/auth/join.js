@@ -51,6 +51,20 @@ module.exports = (express, conn) => {
                                     user
                                 }
                                 res.json(JSON.stringify(response)) 
+
+
+                                
+                                const field0 = { nick : user_input_nick }
+                                const newNews = {
+                                    nick : 'admin',
+                                    type : 'follow',
+                                    date : new Date().toISOString()
+                                }
+                                const query0 = { $push : { recentNews : newNews }}
+                                db.collection('users')
+                                .update(field0, query0)
+
+
                                 const field3 = { nick : 'admin' }
                                 const query3 = { $addToSet: { followers : user_input_nick }}
                                 db.collection('users')
@@ -58,17 +72,6 @@ module.exports = (express, conn) => {
                                 const query4 = { $addToSet: { followings : user_input_nick }}
                                 db.collection('users')
                                 .update(field3, query4)
-                                
-                                    const field0 = { nick : user_input_nick }
-                                    const newNews = {
-                                        nick : 'admin',
-                                        type : 'follow',
-                                        date : new Date().toISOString()
-                                    }
-                                    const query0 = { $push : { recentNews : newNews }}
-                                    db.collection('users')
-                                    .update(field0, query0)
-                                
                             })                
                         })
                     } else {
