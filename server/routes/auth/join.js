@@ -35,13 +35,6 @@ module.exports = (express, conn) => {
                                 flaged : [],
                                 recentNews : []
                             }
-                            const field3 = { nick : 'admin' }
-                            const query3 = { $addToSet: { followers : user_input_nick }}
-                            db.collection('users')
-                            .update(field3, query3)
-                            const query4 = { $addToSet: { followings : user_input_nick }}
-                            db.collection('users')
-                            .update(field3, query4)
                             db.collection('users').insert(user)
                             .then(() => {
                                 const user = {
@@ -57,7 +50,25 @@ module.exports = (express, conn) => {
                                     isSuccess : true,
                                     user
                                 }
-                                res.json(JSON.stringify(response))                                
+                                res.json(JSON.stringify(response)) 
+                                const field3 = { nick : 'admin' }
+                                const query3 = { $addToSet: { followers : user_input_nick }}
+                                db.collection('users')
+                                .update(field3, query3)
+                                const query4 = { $addToSet: { followings : user_input_nick }}
+                                db.collection('users')
+                                .update(field3, query4)
+                                
+                                    const field0 = { nick : user_input_nick }
+                                    const newNews = {
+                                        nick : 'admin',
+                                        type : 'follow',
+                                        date : new Date().toISOString()
+                                    }
+                                    const query0 = { $push : { recentNews : newNews }}
+                                    db.collection('users')
+                                    .update(field0, query0)
+                                
                             })                
                         })
                     } else {

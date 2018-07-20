@@ -20,8 +20,10 @@ class NewsModal extends Component{
     }
 
 	_handleClick = (e) => {
+        console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmm')
+        console.log(e.target.id)
 		if(e.target.id === "modal"){
-            //done
+            console.log('아이디모달아님')
 		} else {
             this.props.invertModalState()
 		}
@@ -65,7 +67,7 @@ class NewsModal extends Component{
                             ? <div className="__msg-container">
                                 <span>최근소식이 없습니다.</span>
                             </div>
-                            : <div>
+                            : <div id="asdfasdf">
                                 {this.state.recentNews.map(((news, index) => {
                                     if(news.type === 'follow'){
                                         return <FollowNews key={index} news={news}/>
@@ -197,6 +199,60 @@ const FollowNews = ({news}) => {
         timeStamp = today.getMonth() - date.getMonth() + "달전"
     }
 
+    const followClick = () => {
+        if(news.follow){
+            //현재 팔로우중 => 언팔
+            console.log('언팔해 ')
+            const request = {
+                unFollowNick : news.nick
+            }
+            fetch('/api/users/remove/follow', {
+                method : "POST",
+                headers : {
+                    'content-type' : 'application/json'
+                },
+                credentials: "same-origin",
+                body : JSON.stringify(request)
+            })
+            .then(data => data.json())
+            .then(json => JSON.parse(json))
+            .then(response => {
+                if(response.isSuccess === true){
+                    this.setState({
+                        ...this.state,
+                        isFollow : false,
+                        isFetching : false
+                    })
+                }
+            })
+        } else {
+            //현지 미팔로우중 => 팔로우
+            console.log('팔로우해')
+            const request = {
+                followNick : news.nick
+            }
+            fetch('/api/users/add/follow', {
+                method : "POST",
+                headers : {
+                    'content-type' : 'application/json'
+                },
+                credentials: "same-origin",
+                body : JSON.stringify(request)
+            })
+            .then(data => data.json())
+            .then(json => JSON.parse(json))
+            .then(response => {
+                if(response.isSuccess === true){
+                    this.setState({
+                        ...this.state,
+                        isFollow : true,
+                        isFetching : false
+                    })
+                }
+            })
+        }  
+    }
+
     return (
         <div className="News LikeNews">
             <div className="__left">
@@ -212,7 +268,7 @@ const FollowNews = ({news}) => {
                 <span className="__date">{timeStamp}</span>  
             </div>
             <div className="__right">
-                <button className={news.follow === true ? "__btn unFollow" : "__btn follow"}>{news.follow === true ? "언팔로잉" : "팔로잉"}</button>
+                <button onClick={followClick} className={news.follow === true ? "__btn unFollow" : "__btn follow"}>{news.follow === true ? "언팔로잉" : "팔로잉"}</button>
             </div>
         </div>
     )
