@@ -1,14 +1,17 @@
 import React, { Fragment, Component } from 'react';
 
 import Header from '~components/Header/Header.js'
-
+import CompassPost from '~components/Compass/CompassPosts/CompassPost.js'
 import './Compass.scss'
+
+import LoadingSpinner from '~components/LoadingSpinner/LoadingSpinner.js'
 
 class Compass extends Component {
     constructor(){
         super()
         this.state = {
-            postIds : []
+            postIds : [],
+            posts : []
         }
     }
 
@@ -28,7 +31,10 @@ class Compass extends Component {
         .then(data => data.json())
         .then(json => JSON.parse(json))
         .then(response => {
-            console.log(response)
+            this.setState({
+                ...this.state,
+                posts : response.posts
+            })
         })
     }
 
@@ -38,7 +44,22 @@ class Compass extends Component {
                 <Header/>
                 <div className="__main">
                     <div className="__contents">
-
+                        <span className="__msg">인기 포스트 둘러보기</span>
+                        {this.state.posts.length === 0
+                            ? 
+                                <div className="__loadingSpinner-container"><LoadingSpinner/></div>
+                            : 
+                                <div>
+                                    {this.state.posts.map((post, index) => {
+                                        return (
+                                            <CompassPost
+                                                key={index}
+                                                post={post}
+                                            />
+                                        )
+                                    })}
+                                </div>
+                        }
                     </div>
                 </div>
             </div>

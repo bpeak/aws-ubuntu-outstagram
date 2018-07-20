@@ -16,6 +16,11 @@
         flex-direction: column;
         justify-content: space-around;
         .__top{
+            position: relative;
+            .__SmallLoadingSpinner-container{
+                position: relative;
+                right: 62px;
+            }
             height: 50px;
             display: flex;
             flex-direction: row;

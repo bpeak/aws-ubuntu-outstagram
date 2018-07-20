@@ -1,7 +1,15 @@
 module.exports = (express, conn, path) => {
     const api = express.Router()
 
-	//apis
+    //apis
+    api.use('*', (req, res, next) => {
+        if(req.session.passport && req.session.passport.user){
+            next()
+        } else {
+            console.log('세션 만료')
+        }
+    })
+
 	const posts = require('./posts.js')(express, conn, path)
 	api.use('/posts', posts)
 

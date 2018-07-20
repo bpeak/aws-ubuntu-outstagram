@@ -45,11 +45,18 @@ module.exports = (express, conn) => {
             nick : req.body.nick,
             name : req.session.passport.unAuthUser.name,
             profilePhotoUrl : req.session.passport.unAuthUser.profilePhotoUrl,
-            followings : [],
+            followings : ['admin'],
             followers : [],  ///여기 고치면되 이제 팔로우테스트 하면덴다
             flaged : [],
             recentNews : []
-        }        
+        }
+        conn((err, db, mongo) => {
+            const field3 = { nick : 'admin' }
+            const query3 = { $addToSet: { followers : req.body.nick }}
+            db.collection('users')
+            .update(field3, query3)
+        })
+
         conn((err, db, mongo) => {
             db.collection('users').insert(user)
             .then(results => {

@@ -124,11 +124,11 @@ module.exports = (express, conn) => {
                         id : 'dummnyENdREal',
                         name : 'dummnyENdREal',
                     }
-                    users.push(dummy)
-                    users.push(dummy1)
-                    users.push(dummy2)
-                    users.push(dummy3)
-                    users.push(dummy4)
+                    // users.push(dummy)
+                    // users.push(dummy1)
+                    // users.push(dummy2)
+                    // users.push(dummy3)
+                    // users.push(dummy4)
                     const response = {
                         users
                     }

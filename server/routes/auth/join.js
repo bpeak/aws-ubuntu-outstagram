@@ -30,11 +30,18 @@ module.exports = (express, conn) => {
                                 name : user_input_name,
                                 salt : pwSet.salt,
                                 key : pwSet.key,
-                                followings : ['kihyun'],
-                                followers : ['bpeak'],  ///여기 고치면되 이제 팔로우테스트 하면덴다
+                                followings : ['admin'],
+                                followers : [],  ///여기 고치면되 이제 팔로우테스트 하면덴다
                                 flaged : [],
                                 recentNews : []
                             }
+                            const field3 = { nick : 'admin' }
+                            const query3 = { $addToSet: { followers : user_input_nick }}
+                            db.collection('users')
+                            .update(field3, query3)
+                            const query4 = { $addToSet: { followings : user_input_nick }}
+                            db.collection('users')
+                            .update(field3, query4)
                             db.collection('users').insert(user)
                             .then(() => {
                                 const user = {

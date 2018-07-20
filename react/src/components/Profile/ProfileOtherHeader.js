@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 //components
 import ProfilePhoto from '~components/Profile/ProfilePhoto/ProfilePhoto.js'
-
+import SmallLoadingSpinner from '~components/LoadingSpinner/SmallLoadingSpinner.js'
 //store
 import store from '~redux/reducers/store.js'
 
@@ -13,9 +13,68 @@ class ProfileOtherHeader extends Component {
     constructor(props){
         super(props)
         this.state = {
-            isFollow : this.props.user.followers.indexOf(store.getState().user.nick) === -1 ? false : true
+            isFollow : this.props.user.followers.indexOf(store.getState().user.nick) === -1 ? false : true,
+            isFetching : false
         }
     }
+
+    _handleOnBtnFollowClick = () => {
+        this.setState({
+            ...this.state,
+            isFetching : true
+        }, () => {
+            if(this.state.isFollow){
+                //현재 팔로우중 => 언팔
+                const request = {
+                    unFollowNick : this.props.user.nick
+                }
+                fetch('/api/users/remove/follow', {
+                    method : "POST",
+                    headers : {
+                        'content-type' : 'application/json'
+                    },
+                    credentials: "same-origin",
+                    body : JSON.stringify(request)
+                })
+                .then(data => data.json())
+                .then(json => JSON.parse(json))
+                .then(response => {
+                    if(response.isSuccess === true){
+                        this.setState({
+                            ...this.state,
+                            isFollow : false,
+                            isFetching : false
+                        })
+                    }
+                })
+            } else {
+                //현지 미팔로우중 => 팔로우
+                const request = {
+                    followNick : this.props.user.nick
+                }
+                fetch('/api/users/add/follow', {
+                    method : "POST",
+                    headers : {
+                        'content-type' : 'application/json'
+                    },
+                    credentials: "same-origin",
+                    body : JSON.stringify(request)
+                })
+                .then(data => data.json())
+                .then(json => JSON.parse(json))
+                .then(response => {
+                    if(response.isSuccess === true){
+                        this.setState({
+                            ...this.state,
+                            isFollow : true,
+                            isFetching : false
+                        })
+                    }
+                })
+            }        
+        })
+    }
+
     render() {
         return (
             <div className="ProfileOtherHeader">
@@ -27,11 +86,18 @@ class ProfileOtherHeader extends Component {
                 <div className="__right">
                     <div className="__top">
                         <span className="__nick">{this.props.user.nick}</span>
-                        <button 
+                        <button
+                            disabled={this.state.isFetching ? true : false }
+                            onClick={this._handleOnBtnFollowClick}
                             className={this.state.isFollow === false ? '__btnUnFollow' : '__btnFollow'}
                         >
                             {this.state.isFollow === true ? '언팔로우' : '팔로우'}
                         </button>
+                        {this.state.isFetching &&
+                            <div className="__SmallLoadingSpinner-container">
+                                <SmallLoadingSpinner/>
+                            </div>                      
+                        }
                     </div>
                     <div className="__mid">
                         <div>

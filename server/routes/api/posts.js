@@ -167,8 +167,8 @@ module.exports = (express, conn, path) => {
             const field = { _id : { $nin: postsCurrentObjectIdList } }
             db.collection('posts')
             .find(field)
-            .limit(3)
-            .sort({ likes : 1 })
+            .limit(18)
+            .sort({ likes : -1 })
             .toArray()
             .then(results => {
                 const response = {

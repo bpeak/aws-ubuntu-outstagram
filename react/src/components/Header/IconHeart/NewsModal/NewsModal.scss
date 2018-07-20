@@ -1,9 +1,10 @@
 .newsModal-container{
     z-index: 100;
     overflow: auto;
+    overflow-x: hidden;
     right: 0;
     top: 35px;
-    width: 500px;
+    width: 600px;
     position: absolute;
     background-color: #ffffff;
     box-shadow:10px 10px 10 10px #ffffff;

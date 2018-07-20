@@ -5,6 +5,23 @@
         justify-content: center;
     }
     .__contents{
-        width: 80%;
+        position: relative;
+        .__loadingSpinner-container{
+            position: relative;
+            left : 430px;
+        }
+        padding-top: 100px;
+        width: 979px;
+        .compassPost{
+            margin: 7px;
+        }
+        .__msg{
+            font-size: 16;
+            color: #999;
+            font-weight: 600;
+            margin-bottom: 15px;
+            margin-top: 500px;
+            margin-left: 15px;
+        }
     }
 }
