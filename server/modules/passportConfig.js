@@ -60,7 +60,7 @@ module.exports = () => {
     passport.use('kakao-login', new KakaoStrategy({
         clientID: '5396e78d8ee5a2b0216be81bdd5e200a',
         clientSecret: 'fKh2HduI3eVkmoYF5ORLAgUyrtsCTZmt',
-        callbackURL: 'http://localhost:80/auth/login/kakao/callback'
+        callbackURL: 'http://18.182.55.45:80/auth/login/kakao/callback'
     }, (accessToken, refreshToken, profile, done) => {
         conn((err, db, mongo) => {
             const field = { $and : [{ id : profile.id }, { memberType : 'kakao' }]}
