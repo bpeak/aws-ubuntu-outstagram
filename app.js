@@ -40,14 +40,24 @@ const auth3 = require('./server/routes/auth/')(express, conn)
 //middlewares
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(session({
-    secret: '@!@$$%&$@$TFGHJGJ&^%U$T',
-    resave: false, //변경사항없을시에도 언제나 재저장여부 => 권장값 false
-    saveUninitialized: true,
-    cookie: {
-        maxAge: ( 1000 * 60 * 60 ) * 12
+
+
+const sessionConfigMaker = (session) => {
+    const RedisStore = require('connect-redis')(session)
+    return {
+        resave: false,
+        saveUninitialized: false,
+        secret: "dsfsdf",
+        name: 'sessionId',
+        cookie: {
+        httpOnly: true,
+        secure: false,
+        },
+        store: new RedisStore({ url:"redis://127.0.0.1:6379", logErrors: true }),
     }
-}))
+}
+
+app.use(session(sessionConfigMaker(session)))
 app.use(passport.initialize())// passport 구동
 app.use(passport.session())// 세션 연결
 passportConfig()
